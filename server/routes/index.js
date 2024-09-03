@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const appRouter = Router();
 
-// attatch to appRouter
+// attach to appRouter
 
 export default appRouter;
