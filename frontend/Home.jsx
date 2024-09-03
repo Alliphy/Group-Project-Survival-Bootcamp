@@ -11,8 +11,8 @@ const Home = () => {
       >
         <div className="tempParent"></div>
         <div className="aboutBootcampDiv">
-          <h2>About the BootCamp</h2>
-          <p>
+          <h2 className="sixCapsFont">About the BootCamp</h2>
+          <p className="libreBaskervilleLargeFont">
             Are you tired of being the first to die in your favorite horror
             movies? Do you dream of outsmarting the killer, escaping the haunted
             house, or surviving the zombie apocalypse? Look no further than
@@ -22,7 +22,7 @@ const Home = () => {
             experts and former horror movie stars, our bootcamp offers a unique
             blend of practical training and theoretical knowledge.
           </p>
-          <Link className="buttonLink">Sign Up</Link>
+          <Link className="signUpLink sixCapsFont">Sign Up</Link>
         </div>
       </section>
     </div>
