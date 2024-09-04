@@ -21,4 +21,4 @@ async function connectToPostgres(dbURI) {
   return sequelize;
 }
 
-export const db = await connectToPostgres("postgresql:///evarue");
+export const db = await connectToPostgres("postgresql:///stinc");
