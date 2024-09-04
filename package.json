@@ -3,11 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
+  "scripts": { 
     "dev": "nodemon server/server.js -w server/server.js -w server -w frontend",
     "build": "vite build",
+    "initdb": "dropdb --if-exists stinc && createdb stinc",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node server/seeds/seed.js"
   },
   "dependencies": {
     "axios": "^1.7.5",
