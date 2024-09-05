@@ -37,12 +37,12 @@ function App() {
             <div>
               <input placeholder="Email" type="text"></input>
               <select name="instructorSelect" type="select">
-                <option value="Ripley">Ellen Ripley</option>
-                <option></option>
-                <option></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+                <option value={"Ripley"}>Ellen Ripley</option>
+                <option value={"Strode"}>Laurie Strode</option>
+                <option value={"Williams"}>Ash Williams</option>
+                <option value={"Warren"}>Ed & Lorraine Warren</option>
+                <option value={"Washington"}>Chris Washington</option>
+                <option value={"Asakawa"}>Yoichi Asakawa</option>
               </select>
             </div>
             <input placeholder="Message..." type="text"></input>
