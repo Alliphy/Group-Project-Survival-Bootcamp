@@ -1,6 +1,7 @@
-import "./index.css";
+import "../index.css";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { Instructors } from "./Instructors";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
       <main>
         <Outlet />
+        <Instructors />
       </main>
 
       <footer>

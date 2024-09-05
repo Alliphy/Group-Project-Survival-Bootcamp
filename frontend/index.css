@@ -156,25 +156,6 @@ button:focus-visible {
   }
 }
 
-.bulletPointAndImgDiv {
-  display: flex;
-  width: 50%;
-
-  .listDiv {
-    width: 100%;
-    height: 100%;
-    padding-left: 8%;
-    padding-right: 8%;
-    display: flex;
-    flex-direction: column;
-    place-content: center;
-    font-size: larger;
-  }
-  li {
-    padding-bottom: 2rem;
-  }
-}
-
 .signUpLink {
   width: 10rem;
   height: 5rem;
@@ -198,69 +179,6 @@ button:focus-visible {
 }
 
 /* END TO-DO */
-
-.instructorImgsDiv {
-  width: 100%;
-  height: 800px;
-  display: flex;
-  justify-content: center;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  div {
-    visibility: hidden;
-  }
-}
-
-.instructorLabelDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding-top: 5%;
-
-  .movieTitle {
-    font-size: 70px;
-  }
-}
-
-.instructorImgsDiv:hover {
-  div {
-    background-color: #191a2690;
-    visibility: visible;
-  }
-}
-
-.instructorSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 5%;
-
-  h2 {
-    font-size: 125px;
-  }
-}
-
-.instructorMasterDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-
-  h3 {
-    font-size: 80px;
-  }
-
-  p {
-    width: 75%;
-    padding-left: 8%;
-    padding-right: 5%;
-    font-size: x-large;
-  }
-}
 
 .missingPersonsImgSection {
   width: 100%;
