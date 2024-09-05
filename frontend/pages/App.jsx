@@ -29,14 +29,17 @@ function App() {
       </main>
 
       <footer>
-        <div>
-          <p className="sixCapsFont">Contact</p>
-          <form>
-            <div>
+        <div
+          className="footerMasterDiv"
+          style={{ backgroundImage: "url('/darkendTreeHands.svg')" }}
+        >
+          <p className="sixCapsFont footerContactPTag">Contact</p>
+          <form className="footerContactForm">
+            <div className="footerFormNameDiv">
               <input placeholder="First Name" type="text"></input>
               <input placeholder="Last Name" type="text"></input>
             </div>
-            <div>
+            <div className="footerFormEmailSelectDiv">
               <input placeholder="Email" type="text"></input>
               <select name="instructorSelect" type="select">
                 <option value={"Ripley"}>Ellen Ripley</option>
@@ -47,7 +50,9 @@ function App() {
                 <option value={"Asakawa"}>Yoichi Asakawa</option>
               </select>
             </div>
-            <input placeholder="Message..." type="text"></input>
+            <div className="footerFormMessageDiv">
+              <input placeholder="Message..." type="text"></input>
+            </div>
           </form>
         </div>
       </footer>
