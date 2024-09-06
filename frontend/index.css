@@ -9,7 +9,7 @@
   letter-spacing: 1px;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(217, 217, 215, 0.955);
   background-color: #242424;
 
   font-synthesis: none;
@@ -44,15 +44,6 @@
   font-style: normal;
 }
 /* ------- END FONTS ---- */
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
 
 body {
   margin: 0;
@@ -136,6 +127,78 @@ button:focus-visible {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-shadow: #181717;
+}
+
+/*------- App.jsx WITHIN FOOTER ------ */
+
+.footerContactPTag {
+  padding-bottom: 5%;
+}
+
+.footerMasterDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+  width: 100%;
+  height: 800px;
+  background-position: center;
+}
+
+.footerContactForm {
+  display: flex;
+  place-content: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 10px;
+  input {
+    width: 400px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  select {
+    width: 400px;
+    padding-right: 56px;
+    height: 33px;
+  }
+}
+
+.footerFormNameDiv {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  place-content: center;
+  width: 100%;
+
+  input {
+    margin-bottom: 20px;
+  }
+}
+
+.footerFormEmailSelectDiv {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom: 20px;
+
+  input {
+    margin-bottom: 25px;
+  }
+}
+
+.footerFormMessageDiv {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  input {
+    margin-top: 10px;
+  }
 }
 
 /*----------------- Home.jsx -------------- */
@@ -155,7 +218,9 @@ button:focus-visible {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding-bottom: 5rem;
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+  text-shadow: #181717;
 
   p {
     padding: 5rem;
@@ -174,9 +239,17 @@ button:focus-visible {
   outline: 1px solid #535bf2;
 }
 
+/* TO-DO FIND OUT WHY HOVER AND ACTIVE STATES ARE NOT WORKING */
+
 .signUpLink:hover {
-  background-color: #1d1b1b;
+  background-color: #1d1b1b !important;
 }
+
+.signUpLink:active {
+  transform: scale(1.1) !important;
+}
+
+/* END TO-DO */
 
 .missingPersonsImgSection {
   width: 100%;
