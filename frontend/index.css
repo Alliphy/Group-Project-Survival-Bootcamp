@@ -89,6 +89,10 @@ button:focus-visible {
   letter-spacing: 6px;
 }
 
+.pageWrapper {
+  margin-top: 50px;
+}
+
 .libreBaskervilleLargeFont {
   font-family: "Libre Baskerville", serif;
   font-weight: 700;
@@ -105,10 +109,26 @@ button:focus-visible {
 
 /* ------ App.jsx ---------- */
 
+header {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+main {
+  min-width: 100vw;
+  min-height: 90vh;
+}
+
 .navLinkContainer {
   display: flex;
   justify-content: end;
-  padding: 3rem;
+  align-items: center;
+  gap: 20px;
 
   nav {
     padding-left: 1rem;
@@ -119,6 +139,7 @@ button:focus-visible {
     width: 160px;
     height: 30px;
     border-radius: 1rem;
+    text-indent: 1rem;
   }
 }
 
@@ -195,6 +216,7 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   width: 100%;
+  outline: none;
 
   input {
     margin-top: 10px;
@@ -202,6 +224,11 @@ button:focus-visible {
 }
 
 /*----------------- Home.jsx -------------- */
+
+.homePageHandsImgDiv {
+  display: flex;
+  place-content: center;
+}
 
 .tempParent {
   width: 100%;
