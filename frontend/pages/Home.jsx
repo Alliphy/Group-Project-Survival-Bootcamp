@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
+import { Instructors } from "./Instructors";
 
 const Home = () => {
   return (
-    <div>
+    <div className="pageWrapper">
+      <div className="w-screen h-screen bg-no-repeat bg-left-bottom bg-[url('/spooky-hands.jpeg')] libreBaskervilleMediumFont homePageHandsImgDiv">
+        {" "}
+        <div className="spookyTimeIncDiv">
+          <p className="sixCapsFont">Spooky Time Inc Presents...</p>
+          <p className="libreBaskervilleLargeFont">
+            Ripley&apos;s Survival BootCamp
+          </p>
+        </div>
+      </div>
       <section
         className="missingPersonsImgSection"
         style={{
@@ -25,6 +35,7 @@ const Home = () => {
           <Link className="signUpLink sixCapsFont">Sign Up</Link>
         </div>
       </section>
+      <Instructors />
     </div>
   );
 };

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": { 
+  "scripts": {
     "dev": "nodemon server/server.js -w server/server.js -w server -w frontend",
     "build": "vite build",
     "initdb": "dropdb --if-exists stinc && createdb stinc",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^1.7.5",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
@@ -22,6 +23,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-flatpickr": "^3.10.13",
     "react-router-dom": "^6.26.1",
     "sequelize": "^6.37.3",
     "vite-express": "^0.18.0"
