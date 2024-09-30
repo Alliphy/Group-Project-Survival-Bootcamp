@@ -3,6 +3,8 @@ import { Courses } from "./pages/Courses.jsx";
 import { Home } from "./pages/Home.jsx";
 import { Login } from "./pages/Users.jsx";
 import "./index.css";
+import globalStore from "./store/store.js";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -35,5 +37,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={globalStore}>
+    <RouterProvider router={router} />
+  </Provider>
 );
