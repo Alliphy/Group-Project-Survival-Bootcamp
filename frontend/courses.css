@@ -1,0 +1,79 @@
+.courseContainerDiv {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  min-width: 500px;
+  width: 100%;
+
+  h2 {
+    font-size: 78px;
+  }
+
+  p {
+    padding-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .courseContainerDiv {
+    flex-wrap: wrap;
+    padding-top: none;
+  }
+
+  .courseInstructorTitleImgDiv {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.courseInstructorImgs {
+  width: 100%;
+  height: 100%;
+}
+
+.selectInstructorDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.courseDescriptionDiv {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  justify-content: center;
+  align-items: center;
+  text-overflow: wrap;
+  width: 100%;
+  padding: 5%;
+
+  p {
+    margin-top: 5%;
+  }
+
+  h3 {
+    font-size: 60px;
+    margin-bottom: 5%;
+  }
+}
+
+.courseTitlesDiv {
+  display: flex;
+  justify-content: center;
+  font-size: 84px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.courseInstructorTitleImgDiv {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+
+.courseInstructorNameDiv {
+  display: flex;
+  flex-direction: column;
+}
