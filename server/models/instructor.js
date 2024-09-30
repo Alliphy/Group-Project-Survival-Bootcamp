@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
 import { db } from "../config/db.js";
 
-const Client = db.define("Client", {
-  clientId: {
+const Instructor = db.define("Instructor", {
+  instructorId: {
     type: Sequelize.DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -26,4 +26,4 @@ const Client = db.define("Client", {
   },
 });
 
-export default Client;
+export default Instructor;

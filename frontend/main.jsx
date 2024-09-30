@@ -2,6 +2,8 @@ import App from "./pages/App.jsx";
 import { Home } from "./pages/Home.jsx";
 import { Instructors } from "./pages/Instructors.jsx";
 import "./index.css";
+import globalStore from "./store/store.js";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import {
   Route,
@@ -20,5 +22,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={globalStore}>
+    <RouterProvider router={router} />
+  </Provider>
 );
