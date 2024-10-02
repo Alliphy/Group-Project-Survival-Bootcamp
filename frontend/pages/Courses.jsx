@@ -3,7 +3,7 @@ import "../courses.css";
 const Courses = () => {
   return (
     <>
-      <div className="pageWrapper courseMasterDiv">
+      <main className="pageWrapper courseMasterDiv">
         <div className="selectInstructorDiv">
           <div className="courseTitlesDiv sixCapsFont">
             <p>Find a Course</p>
@@ -165,7 +165,8 @@ const Courses = () => {
             </div>
           </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </>
   );
 };

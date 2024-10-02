@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(
   session({
-    secret: process.env.SESSSION_SECRET,
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
   })
@@ -27,18 +27,18 @@ app.use(
 app.get("/dummy", (req, res) => {
   const dummyData = [
     {
-      id: 1,
+      instructorId: 1,
       email: "john.doe@example.com",
       firstName: "Ellen",
       lastName: "Ripley",
       password: "password123",
-      courses: [
+      availability: ["2024-10-24"],
+      Courses: [
         {
           courseId: 101,
           title: "Introduction to Programming",
           description:
             "This course provides an introduction to programming concepts using Python.",
-          availability: ["2024-10-24"],
         },
         {
           courseId: 102,
@@ -50,25 +50,24 @@ app.get("/dummy", (req, res) => {
       ],
     },
     {
-      id: 2,
+      instructorId: 2,
       email: "jane.smith@example.com",
       firstName: "Laurie",
       lastName: "Strode",
       password: "securePass456",
-      courses: [
+      availability: ["2024-10-01"],
+      Courses: [
         {
           courseId: 201,
           title: "Advanced Mathematics",
           description:
             "A deep dive into advanced calculus, algebra, and statistical methods.",
-          availability: ["2024-10-01"],
         },
         {
           courseId: 202,
           title: "Linear Algebra",
           description:
             "Learn the fundamentals of linear algebra, matrices, and vector spaces.",
-          availability: ["2024-10-15"],
         },
       ],
     },

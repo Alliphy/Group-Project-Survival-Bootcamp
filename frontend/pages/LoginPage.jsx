@@ -1,10 +1,9 @@
 import { useState } from "react";
+import "../loginPage.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [role, setRole] = useState("user");
-  // Default to user
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +17,6 @@ export const Login = () => {
         body: JSON.stringify({
           email,
           password,
-          // role,
         }),
       });
 
@@ -34,25 +32,27 @@ export const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "100px" }}>
-      <label>Email:</label>
-      <input
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label>Password:</label>
-      <input
-        type="text"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {/* <label>Role:</label>
-      <select value={role} onChange={(e) => setRole(e.target.value)}>
-        <option value="user">User</option>
-        <option value="instructor">Instructor</option>
-      </select> */}
-      <button type="submit">Login</button>
-    </form>
+    <div className="formMasterDiv">
+      <form onSubmit={handleSubmit} className="login-form">
+        <label className="login-label">Email:</label>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="login-input"
+        />
+        <label className="login-label">Password:</label>
+        <input
+          type="password"
+          // Change to "password" for security
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="login-input"
+        />
+        <button type="submit" className="login-button">
+          Login
+        </button>
+      </form>
+    </div>
   );
 };

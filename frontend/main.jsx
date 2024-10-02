@@ -1,7 +1,8 @@
 import App from "./pages/App.jsx";
+import { AdministratorPage } from "./pages/AdministratorPage.jsx";
 import { Courses } from "./pages/Courses.jsx";
 import { Home } from "./pages/Home.jsx";
-import { Login } from "./pages/Users.jsx";
+import { Login } from "./pages/LoginPage.jsx";
 import "./index.css";
 import globalStore from "./store/store.js";
 import { Provider } from "react-redux";
@@ -23,7 +24,11 @@ const router = createBrowserRouter(
           path: "/courses",
           element: <Courses />,
         },
-        { path: "/login", element: <Login /> },
+        { path: "/admin", element: <AdministratorPage /> },
+        {
+          path: "/login",
+          element: <Login />,
+        },
       ],
     },
   ]

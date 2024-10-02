@@ -1,5 +1,6 @@
 import { DatePicker } from "../components/DatePicker.jsx";
 import { useState, useEffect } from "react";
+import "../footer.css";
 
 export const Footer = () => {
   const [selectInstructor, setSelectInstructor] = useState("");
@@ -45,7 +46,7 @@ export const Footer = () => {
                 });
                 console.log(index);
 
-                setCoursesToShow(selectAllInstructors[index].courses);
+                setCoursesToShow(selectAllInstructors[index].Courses);
               }}
             >
               <option value={""} disabled>
@@ -53,7 +54,7 @@ export const Footer = () => {
               </option>
               {selectAllInstructors.map((instructor, index) => (
                 <option
-                  data-id={instructor.id}
+                  data-id={instructor.instructorId}
                   value={instructor.firstName}
                   key={instructor.firstName}
                   defaultValue={index === 0 ? true : false}
@@ -62,7 +63,6 @@ export const Footer = () => {
                 </option>
               ))}
             </select>
-
             {selectInstructor && (
               <select
                 onChange={(e) => {
@@ -90,10 +90,10 @@ export const Footer = () => {
             {selectInstructor && selectCourse && (
               <DatePicker
                 selectInstructor={selectInstructor}
-                selectCourse={selectCourse}
+                availability={selectInstructor.availability}
               />
             )}
-
+            {console.log(selectInstructor.availability)}
             {/* availability: ["2024-10-05"], */}
           </div>
           <div className="footerFormMessageDiv">
