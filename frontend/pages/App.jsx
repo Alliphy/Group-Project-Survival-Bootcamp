@@ -11,7 +11,6 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
           <Link to="/login">Login</Link>
-          <input type="search" placeholder="Search"></input>
         </div>
       </header>
 

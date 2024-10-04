@@ -1,0 +1,45 @@
+.formMasterDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  place-content: center;
+  height: 600px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  margin: auto;
+  width: 300px;
+  height: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #2b4ed9;
+}

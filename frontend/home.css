@@ -1,0 +1,74 @@
+/*----------------- Home.jsx -------------- */
+
+.homePageHandsImgDiv {
+  display: flex;
+  place-content: center;
+}
+
+.aboutBootcampDiv {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+  text-shadow: #181717;
+
+  p {
+    padding: 5rem;
+  }
+}
+
+.signUpLink {
+  width: 10rem;
+  height: 5rem;
+  color: #242424;
+  background-color: #535bf2;
+  border-radius: 1rem;
+  font-size: 50px;
+  text-align: center;
+  text-shadow: #213547;
+  outline: 1px solid #535bf2;
+}
+
+.signUpLink:hover {
+  background-color: #1d1b1b !important;
+}
+
+.signUpLink:active {
+  transform: scale(1.1) !important;
+}
+
+.missingPersonsImgSection {
+  width: 100%;
+  height: 1000px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-origin: content-box;
+  background-size: cover;
+  /* position: absolute; */
+}
+
+h2,
+p {
+  filter: brightness(100%);
+}
+
+footer {
+  margin-top: 20rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #18222b;
+    background-color: #f2efef;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #893298;
+  }
+}

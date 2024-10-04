@@ -13,6 +13,7 @@ export const DatePicker = (props) => {
   }, [date]);
   return (
     <Flatpickr
+      className="event"
       options={{
         altInput: true,
         altFormat: "F j, Y",
@@ -20,14 +21,15 @@ export const DatePicker = (props) => {
         minDate: "today",
         maxDate: new Date().fp_incr(60),
         inline: true,
-        enable: props.selectCourse.availability,
+        enable: [],
+        //------------------- plugins: new confirmNewDatePlugin({}),
         locale: {
           firstDayOfWeek: 1, // start week on Monday
         },
       }}
       onDayCreate={(selectedDates) => {
         selectedDates.forEach((date) => {
-          // courses[currentInstructor.name].find course => course.availableDates.find theDate =>
+          // courses[currentInstructor.name].find Course => Course.availableDates.find theDate =>
           // theDate = date
         });
       }}

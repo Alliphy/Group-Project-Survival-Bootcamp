@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Instructors } from "./Instructors";
+import { Instructors } from "./InstructorsUi.jsx";
+import "../home.css";
 
 const Home = () => {
   return (
@@ -19,7 +20,6 @@ const Home = () => {
           backgroundImage: "url('./darkened-missing-persons-poster.svg')",
         }}
       >
-        <div className="tempParent"></div>
         <div className="aboutBootcampDiv">
           <h2 className="sixCapsFont">About the BootCamp</h2>
           <p className="libreBaskervilleLargeFont">
@@ -32,7 +32,9 @@ const Home = () => {
             experts and former horror movie stars, our bootcamp offers a unique
             blend of practical training and theoretical knowledge.
           </p>
-          <Link className="signUpLink sixCapsFont">Sign Up</Link>
+          <Link className="signUpLink sixCapsFont" to="/signup">
+            Sign Up
+          </Link>
         </div>
       </section>
       <Instructors />
