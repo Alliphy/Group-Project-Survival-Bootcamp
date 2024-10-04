@@ -52,6 +52,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   height: fit-content;
+  color: rgba(217, 217, 215, 0.955);
+  background-color: #242424;
 }
 
 h1 {

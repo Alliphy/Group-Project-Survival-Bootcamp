@@ -32,7 +32,9 @@ const Home = () => {
             experts and former horror movie stars, our bootcamp offers a unique
             blend of practical training and theoretical knowledge.
           </p>
-          <Link className="signUpLink sixCapsFont">Sign Up</Link>
+          <Link className="signUpLink sixCapsFont" to="/signup">
+            Sign Up
+          </Link>
         </div>
       </section>
       <Instructors />

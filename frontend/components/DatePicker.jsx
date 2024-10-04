@@ -29,7 +29,7 @@ export const DatePicker = (props) => {
       }}
       onDayCreate={(selectedDates) => {
         selectedDates.forEach((date) => {
-          // courses[currentInstructor.name].find course => course.availableDates.find theDate =>
+          // courses[currentInstructor.name].find Course => Course.availableDates.find theDate =>
           // theDate = date
         });
       }}

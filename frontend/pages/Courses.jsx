@@ -1,4 +1,5 @@
 import "../courses.css";
+import { Footer } from "../Layouts/Footer";
 
 const Courses = () => {
   return (

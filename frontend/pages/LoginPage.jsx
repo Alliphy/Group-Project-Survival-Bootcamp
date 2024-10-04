@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "../loginPage.css";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export const Login = () => {
       if (response.ok) {
         // Handle successful login (redirect, set session)
         console.log("Login successful!");
+        navigate("/");
       } else {
         console.error("Login failed:", response.statusText);
       }

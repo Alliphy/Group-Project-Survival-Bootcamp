@@ -3,6 +3,7 @@ import { AdministratorPage } from "./pages/AdministratorPage.jsx";
 import { Courses } from "./pages/Courses.jsx";
 import { Home } from "./pages/Home.jsx";
 import { Login } from "./pages/LoginPage.jsx";
+import { SignUp } from "./pages/SignUp.jsx";
 import "./index.css";
 import globalStore from "./store/store.js";
 import { Provider } from "react-redux";
@@ -28,6 +29,10 @@ const router = createBrowserRouter(
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/signUp",
+          element: <SignUp />,
         },
       ],
     },

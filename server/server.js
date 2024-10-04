@@ -1,8 +1,11 @@
 import express from "express";
+import process from "process";
 import session from "express-session";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
 import "dotenv/config";
+import Client from "./models/client.js";
+import cors from "cors";
 
 const app = express();
 const PORT = 5090;
@@ -23,6 +26,36 @@ app.use(
     resave: false,
   })
 );
+app.use(cors());
+
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+  const foundUser = await Client.findOne({ where: { email } });
+  if (!foundUser) {
+    return res.status(401).send("Unauthorized");
+  }
+  if (foundUser.password !== password) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  return res.send("ok");
+});
+
+app.post("/api/signup", async (req, res) => {
+  const { email, password, firstName, lastName } = req.body;
+  const foundUser = await Client.findOne({ where: { email } });
+  if (foundUser) {
+    return res.status(400).send("Email already exists");
+  }
+  await Client.create({
+    email,
+    password,
+    firstName,
+    lastName,
+  });
+
+  return res.send("user created");
+});
 
 app.get("/dummy", (req, res) => {
   const dummyData = [
