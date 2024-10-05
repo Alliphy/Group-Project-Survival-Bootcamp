@@ -1,5 +1,5 @@
 import { DatePicker } from "../components/DatePicker.jsx";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "flatpickr/dist/themes/material_green.css";
 import dayjs from "dayjs";
 
@@ -8,16 +8,6 @@ export const AdministratorPage = (props) => {
   const [courseData, setCourseData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs()); // Selected date for datepicker
   const [courseAvailability, setCourseAvailability] = useState([]); // List of available dates for current course
-
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const localIsLoggedIn = localStorage.getItem("isLoggedIn");
-    // console.log(localIsLoggedIn); // for debugging purposes
-    if (localIsLoggedIn === "true") {
-      return true;
-    } else {
-      return false;
-    }
-  });
 
   const handleSaveDate = async (e) => {
     e.preventDefault();
@@ -29,8 +19,8 @@ export const AdministratorPage = (props) => {
     try {
       // Prepare the payload (our data to send) for the post request
       const payload = {
-        title: Course.title,
-        instructorId: Course.instructorId,
+        title: Courses.title,
+        instructorId: Courses.instructorId,
       };
 
       // Send a POST request to the API endpoint to save the new post

@@ -22,6 +22,7 @@ app.use(express.static("public"));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 10 * 1000 * 60 }, // Session expires after 10 minutes of inactivity
     saveUninitialized: true,
     resave: false,
   })
@@ -29,16 +30,35 @@ app.use(
 app.use(cors());
 
 app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-  const foundUser = await Client.findOne({ where: { email } });
-  if (!foundUser) {
-    return res.status(401).send("Unauthorized");
-  }
-  if (foundUser.password !== password) {
-    return res.status(401).send("Unauthorized");
-  }
+  try {
+    const { email, password } = req.body;
+    console.log(req.body);
+    const foundUser = await Client.findOne({ where: { email } });
 
-  return res.send("ok");
+    if (!foundUser) {
+      return res.status(401).send("Unauthorized");
+    }
+    if (foundUser.password !== password) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    req.session.logged_in = true;
+    req.session.user = {
+      userId: foundUser.userId,
+      email: foundUser.email,
+      password: foundUser.password,
+    };
+
+    return res.json({
+      user: foundUser,
+      message: "You are now logged in!",
+      success: true,
+      session: req.session,
+    });
+  } catch (e) {
+    console.log("hit catch");
+    res.status(500).json({ error: "Server Error" });
+  }
 });
 
 app.post("/api/signup", async (req, res) => {
@@ -55,6 +75,29 @@ app.post("/api/signup", async (req, res) => {
   });
 
   return res.send("user created");
+});
+
+// Custom route middleware function that checks if the user is logged in.
+function loginRequired(req, res, next) {
+  // console.log("session", req.session); // Log session for debugging
+
+  // Check if user is logged in by checking if the user ID exists in the session
+
+  if (!req.session.user.instructorId || !req.session.user.clientId) {
+    // Send 401 Unauthorized response if not logged in
+    res.status(401).json({ error: "Unauthorized", from: "middleware" });
+  } else {
+    next(); // Call the next middleware if user is logged in
+  }
+}
+// Note the `loginRequired` argument passed to the routes below!
+
+app.post("/api/logout", (req, res) => {
+  console.log("hit logout");
+  // Destroy the user session
+  req.session.destroy();
+  // Send a success response
+  res.json({ success: true });
 });
 
 app.get("/dummy", (req, res) => {

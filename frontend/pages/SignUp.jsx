@@ -37,7 +37,7 @@ export const SignUp = () => {
   return (
     <>
       <div className="formMasterDiv">
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit} className="signup-form">
           <label className="sign-up-label">First Name:</label>
           <input
             type="text"

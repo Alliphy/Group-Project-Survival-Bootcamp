@@ -20,7 +20,6 @@ export const DatePicker = (props) => {
         dateFormat: "Y-m-d",
         minDate: "today",
         maxDate: new Date().fp_incr(60),
-        inline: true,
         enable: [],
         //------------------- plugins: new confirmNewDatePlugin({}),
         locale: {
