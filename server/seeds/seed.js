@@ -142,10 +142,13 @@ const getWeekdayObjects = () => {
   // Loop through each day from startDate to endDate
   while (startDate <= endDate) {
     const day = startDate.getDay();
-    if (day !== 0 && day !== 6) {
+    if (day !== 5 && day !== 6) {
       // Exclude Sundays (0) and Saturdays (6)
+      // ^^NOTE^^ //
+      // This does not work as originally thought. It was excluding Sundays and Mondays, NOT
+      // Saturdays and Sundays. Making the numbers 5 an 6 made it work as intended.
       const dateString = startDate.toISOString().split("T")[0]; // Format date as YYYY-MM-DD
-      //   Use Create method to make new entry in avails table
+      //  Use Create method to make new entry in avails table
       const initDate = Avail.create({
         date: dateString,
         ripley: true,

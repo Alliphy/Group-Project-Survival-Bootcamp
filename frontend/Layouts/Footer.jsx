@@ -4,21 +4,50 @@ import "../footer.css";
 
 export const Footer = () => {
   const [selectInstructor, setSelectInstructor] = useState("");
-  const [selectCourse, setSelectCourse] = useState("");
   const [selectAllInstructors, setSelectAllInstructors] = useState([]);
 
+  const [courses, setCourses] = useState([]);
   const [coursesToShow, setCoursesToShow] = useState([]);
+  const [selectCourse, setSelectCourse] = useState("");
 
+  // Fetches a list of all instructors
   useEffect(() => {
-    fetch("/dummy").then(async (data) => {
-      const courses = await data.json();
-      console.log(courses);
+    fetch("/api/instructor-list").then(async (data) => {
+      const instructors = await data.json();
+      console.log("Instructors: ", instructors);
 
-      setSelectAllInstructors(courses.data);
+      setSelectAllInstructors(instructors);
     });
   }, []);
 
-  console.log(selectAllInstructors);
+  // Fetches all courses
+  useEffect(() => {
+    fetch("/api/all-courses").then(async (data) => {
+      const courses = await data.json();
+      console.log("Courses: ", courses);
+      setCourses(courses);
+    });
+  }, []);
+
+  function handleSelectInstructor(e) {
+    const selectedInstructorCourses = [];
+    setSelectInstructor(e.target.value);
+
+    // For future reference, this only works if all the instructors are fetched in order.
+    // If an instructor is deleted, this will NEED to be refactored in order to work.
+    const instructorId = e.target.selectedIndex;
+    
+    const index = selectAllInstructors.findIndex((instructor) => {
+      //whatever returns true on findIndex will return the value of index
+      return instructor.firstName === e.target.value;
+    });
+    for (const course of courses) {
+      if (course.instructorId === instructorId) {
+        selectedInstructorCourses.push(course);
+      } 
+    }
+    setCoursesToShow(selectedInstructorCourses);
+  }
 
   return (
     <footer>
@@ -37,39 +66,30 @@ export const Footer = () => {
             <select
               name="instructorSelect"
               type="select"
-              onChange={(e) => {
-                setSelectInstructor(e.target.value);
-                console.dir(e.target);
-                const index = selectAllInstructors.findIndex((instructor) => {
-                  //whatever returns true on findIndex will return the value of index
-                  return instructor.firstName === e.target.value;
-                });
-                console.log(index);
-
-                setCoursesToShow(selectAllInstructors[index].Courses);
-              }}
+              onChange={handleSelectInstructor}
             >
               <option value={""} disabled>
                 Select an Instructor
               </option>
               {selectAllInstructors.map((instructor, index) => (
                 <option
-                  data-id={instructor.instructorId}
-                  value={instructor.firstName}
-                  key={instructor.firstName}
+                  data-id={instructor.instructor_id}
+                  value={instructor.lastName}
+                  key={instructor.instructor_id}
                   defaultValue={index === 0 ? true : false}
                 >
-                  {instructor.firstName}
+                  {instructor.firstName + " " + instructor.lastName}
                 </option>
               ))}
             </select>
             {selectInstructor && (
               <select
+                name="courseSelect"
+                type="select"
                 onChange={(e) => {
                   const index = coursesToShow.findIndex((courses) => {
                     return courses.title === e.target.value;
                   });
-                  console.log(index);
                   setSelectCourse(coursesToShow[index]);
                 }}
               >
@@ -79,7 +99,7 @@ export const Footer = () => {
                 {coursesToShow.map((courses, index) => (
                   <option
                     value={courses.title}
-                    key={courses.title}
+                    key={`${courses.title}-${index}`}
                     defaultValue={index === 0 ? true : false}
                   >
                     {courses.title}
@@ -90,11 +110,8 @@ export const Footer = () => {
             {selectInstructor && selectCourse && (
               <DatePicker
                 selectInstructor={selectInstructor}
-                availability={selectInstructor.availability}
               />
             )}
-            {console.log(selectInstructor.availability)}
-            {/* availability: ["2024-10-05"], */}
           </div>
           <div className="footerFormMessageDiv">
             <input placeholder="Message..." type="text"></input>
