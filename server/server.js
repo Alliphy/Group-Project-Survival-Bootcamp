@@ -35,22 +35,6 @@ app.use(
 );
 app.use(cors());
 
-// Make call to get ALL Instructors
-app.get("/api/instructor-list", async (req, res) => {
-  const allInstructors = await Instructor.findAll({
-    attributes: ["instructor_id", "firstName", "lastName"],
-  });
-  res.json(allInstructors);
-});
-
-// Endpoint for getting ALL courses
-app.get("/api/all-courses", async (req, res) => {
-  const allCourses = await Course.findAll({
-    attributes: ["title", "instructorId"],
-  });
-  res.json(allCourses);
-});
-
 // Gets all "true" availabilities for selected Instructor
 app.post("/api/instructor-avails", async (req, res) => {
   const { instructor } = req.body;
@@ -174,12 +158,13 @@ app.post("/api/signup", async (req, res) => {
   return res.send("user created");
 });
 
-app.post("/api/create-appointment", async (req, res) => {
-  const { date, instructor_id, client_id } = req.body;
+app.post("/api/create-appointment", loginRequired, async (req, res) => {
+  const { date, instructor_id, client_id, course_id } = req.body;
   await Appointment.create({
     date,
     instructor_id,
     client_id,
+    course_id,
   });
 
   return res.send("appointment created");

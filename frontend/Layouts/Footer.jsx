@@ -173,6 +173,7 @@ export const Footer = () => {
                 name="instructorSelect"
                 type="select"
                 onChange={handleSelectInstructor}
+                defaultValue={""}
               >
                 <option value={""} disabled>
                   Select an Instructor
@@ -191,6 +192,7 @@ export const Footer = () => {
               </select>
               {selectInstructor && (
                 <select
+                defaultValue={""}
                   onChange={(e) => {
                     const index = coursesToShow.findIndex((courses) => {
                       return courses.title === e.target.value;
@@ -221,11 +223,13 @@ export const Footer = () => {
                   availability={selectInstructor.availability}
                 />
               )}
-              {console.log(selectInstructor.availability)}
+              {/* {console.log(selectInstructor.availability)} */}
               {/* availability: ["2024-10-05"], */}
             </div>
             <div className="footerFormMessageDiv">
-              <button>Submit</button>
+              <button
+              onClick={handleSubmit}
+              >Submit</button>
             </div>
           </form>
         )}
