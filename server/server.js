@@ -153,24 +153,33 @@ app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(req.body);
+    let user;
     const foundUser = await Client.findOne({ where: { email } });
 
     if (!foundUser) {
+      user = await Instructor.findOne({ where: { email } });
+    } else {
+      user = foundUser;
+    }
+
+    console.log(user);
+
+    if (!user) {
       return res.status(401).send("Unauthorized");
     }
-    if (foundUser.password !== password) {
+    if (user.password !== password) {
       return res.status(401).send("Unauthorized");
     }
 
     req.session.logged_in = true;
     req.session.user = {
-      userId: foundUser.userId,
-      email: foundUser.email,
-      password: foundUser.password,
+      userId: user.userId,
+      email: user.email,
+      password: user.password,
     };
 
     return res.json({
-      user: foundUser,
+      user: user,
       message: "You are now logged in!",
       success: true,
       session: req.session,
