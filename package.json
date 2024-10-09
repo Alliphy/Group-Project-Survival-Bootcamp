@@ -9,7 +9,8 @@
     "initdb": "dropdb --if-exists stinc && createdb stinc",
     "lint": "eslint .",
     "preview": "vite preview",
-    "seed": "node server/seeds/seed.js"
+    "seed": "node server/seeds/seed.js",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
