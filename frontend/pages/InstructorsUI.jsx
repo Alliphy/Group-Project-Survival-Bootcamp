@@ -12,7 +12,7 @@ const Instructors = () => {
           </div>
           <div className="instructorMasterDiv">
             <div className="bulletPointAndImgDiv">
-              <div>
+              <div className="listHoverDiv">
                 <div
                   alt="image of Ellen Ripley from Aliens film"
                   className="instructorImgsDiv"

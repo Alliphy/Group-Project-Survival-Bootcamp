@@ -62,7 +62,7 @@ export const LoginPage = () => {
 
   return (
     <div className="formMasterDiv">
-      {!isLoggedIn && (
+      {!isLoggedIn.email && (
         <form className="login-form" onSubmit={handleSubmit}>
           <label className="login-label">Email:</label>
           <input
@@ -76,7 +76,6 @@ export const LoginPage = () => {
           <label className="login-label">Password:</label>
           <input
             type="password"
-            // Change to "password" for security
             value={password}
             autoComplete="password"
             required

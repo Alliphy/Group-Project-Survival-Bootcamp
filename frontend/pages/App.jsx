@@ -12,6 +12,10 @@ function App() {
     if (loggedIn) {
       console.log(loggedIn);
       dispatch({ type: "SET_USER", payload: loggedIn });
+      const userKeys = Object.keys(loggedIn);
+      if (userKeys.includes("instructorId")) {
+        dispatch({ type: "SET_ADMIN" });
+      }
     }
   }, [dispatch]);
 

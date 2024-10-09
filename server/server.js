@@ -6,9 +6,12 @@ import ViteExpress from "vite-express";
 import "dotenv/config";
 import Client from "./models/client.js";
 import cors from "cors";
+import Instructor from "./models/instructor.js";
+import Appointment from "./models/appointment.js";
+import { Avail } from "./models/avail.js";
 
 const app = express();
-const PORT = 5090;
+const PORT = process.env.PORT || 5090;
 
 ViteExpress.config({
   printViteDevServerHost: true,
@@ -29,6 +32,43 @@ app.use(
 );
 app.use(cors());
 
+// app.post("/api/adminlogin", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     console.log(req.body);
+
+//     const foundInstructor = await Instructor.findOne({ where: { email } });
+
+//     if (!foundInstructor) {
+//       return res.status(401).send("Unauthorized");
+//     }
+
+//     // Check for instructor first
+//     if (foundInstructor) {
+//       if (foundInstructor.password !== password) {
+//         return res.status(401).send("Unauthorized");
+//       }
+//       // Set session for instructor
+//       req.session.logged_in = true;
+//       req.session.user = {
+//         instructorId: foundInstructor.instructorId,
+//         email: foundInstructor.email,
+//         password: foundInstructor.password,
+//       };
+
+//       return res.json({
+//         user: { instructor: true }, // Indicate instructor login
+//         message: "You are now logged in!",
+//         success: true,
+//         session: req.session,
+//       });
+//     }
+//   } catch (e) {
+//     console.log("hit catch");
+//     res.status(500).json({ error: "Server Error" });
+//   }
+// });
+
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -38,6 +78,7 @@ app.post("/api/login", async (req, res) => {
     if (!foundUser) {
       return res.status(401).send("Unauthorized");
     }
+
     if (foundUser.password !== password) {
       return res.status(401).send("Unauthorized");
     }
@@ -98,6 +139,52 @@ app.post("/api/logout", (req, res) => {
   req.session.destroy();
   // Send a success response
   res.json({ success: true });
+});
+
+app.get("/api/appointment", async (req, res) => {
+  const appointments = await Appointment.findAll();
+  console.log("Hit");
+  return res.json({ appointments }); // Send a JSON response containing the list of appointments
+});
+
+app.delete(
+  "/api/appointment/:appointmentId",
+  loginRequired,
+  async (req, res) => {
+    const appointmentId = req.params.appointmentId; // Extract the appointmentId from the parameters
+
+    try {
+      // Find the appt to be deleted based on apptId
+      const apptToDelete = await Appointment.findByPk(appointmentId);
+
+      if (!apptToDelete) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+
+      // Delete the appointment from the database
+      await apptToDelete.destroy();
+
+      res.status(204).send(); // Send 204 No Content response to indicate successful deletion
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+      res.status(500).json({ message: "Internal server error" }); // Send 500 Internal Server Error response if there's an error
+    }
+  }
+);
+
+app.post("/api/admin/avail", loginRequired, async (req, res) => {
+  const { instructorId } = req.session.user;
+  const { date } = req.body;
+
+  const instructor = await Instructor.findByPk(instructorId);
+  console.log("instructor:", instructor);
+
+  if (!instructor) {
+    return res.status(401).json({ error: "Unauthorized", from: "/avail" }); // Send 401 Unauthorized response if user is not found
+  }
+  const availability = await Avail.create({ date: date });
+
+  res.json(availability); // Send a JSON response containing the newly created post
 });
 
 app.get("/dummy", (req, res) => {

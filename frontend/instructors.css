@@ -79,3 +79,23 @@
     padding-bottom: 2rem;
   }
 }
+
+@media screen and (max-width: 960px) {
+  .instructorImgsDiv:hover {
+    div {
+      visibility: hidden;
+    }
+  }
+
+  .instructorMasterDiv {
+    flex-wrap: wrap;
+  }
+
+  .instructorImgsDiv {
+    width: 100%;
+    height: 75%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+}

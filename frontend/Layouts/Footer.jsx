@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "../footer.css";
 import { useNavigate } from "react-router-dom";
 import { Dayjs } from "dayjs";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -89,9 +90,13 @@ export const Footer = () => {
 
         {!isLoggedIn ? (
           <div>
-            <button>Sign Up</button>
+            <Link to="/signup">
+              <button type="button">Sign Up</button>
+            </Link>
             <p>Or</p>
-            <button>Login</button>
+            <Link to="/login">
+              <button type="button">Login</button>
+            </Link>
           </div>
         ) : (
           <form className="footerContactForm" onSubmit={handleSubmit}>
