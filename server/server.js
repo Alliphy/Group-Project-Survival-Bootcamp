@@ -76,10 +76,19 @@ app.post("/api/instructor-avails", async (req, res) => {
   res.json(parsedAvails);
 });
 
+//Make call to get single instructor
+app.get("/api/current-instructor"),
+  async (req, res) => {
+    const currentInstructor = await Instructor.findOne({
+      attributes: ["instructor_id", "firstName", "lastName", "email"],
+    });
+    res.json(currentInstructor);
+  };
+
 // Make call to get ALL Instructors
 app.get("/api/instructor-list", async (req, res) => {
   const allInstructors = await Instructor.findAll({
-    attributes: ["instructor_id", "firstName", "lastName"],
+    attributes: ["instructor_id", "firstName", "lastName", "email"],
   });
   res.json(allInstructors);
 });
@@ -185,14 +194,20 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.delete(
-  "/api/appointment/:appointmentId",
+  "/api/instructor/:appointmentId",
   loginRequired,
   async (req, res) => {
-    const appointmentId = req.params.appointmentId; // Extract the appointmentId from the parameters
+    const appointment = await Appointment.findAll({
+      where: {
+        instructorId: req.params.instructorId,
+      },
+    }); // Extract the appointmentId from the parameters
 
     try {
       // Find the appt to be deleted based on apptId
-      const apptToDelete = await Appointment.findByPk(appointmentId);
+      const apptToDelete = await Appointment.findByPk({
+        appointment,
+      });
 
       if (!apptToDelete) {
         return res.status(404).json({ message: "Post not found" });
@@ -274,6 +289,44 @@ app.get("/dummy", (req, res) => {
   ];
 
   res.status(200).json({ data: dummyData, success: true });
+});
+
+app.get("/api/instructor/data", async (req, res) => {
+  try {
+    const instructor = await Instructor.findByPk(req.instructorId);
+    res.json({ instructor });
+  } catch (error) {
+    console.error("Error Getting Instructor Data from server:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to fetch instructor data from server" });
+  }
+});
+
+app.post("/avail", async (req, res) => {
+  try {
+    const { date, instructorId } = req.body;
+    const avail = await Avail.create({
+      date,
+      instructorId,
+    });
+    res.json({ avail });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to save availability" });
+  }
+});
+
+app.delete("/avail/:appointmentId", async (req, res) => {
+  try {
+    const appointment = await Appointment.findByPk(req.params.appointmentId);
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+    await appointment.destroy();
+    res.json({ message: "Appointment deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete appointment" });
+  }
 });
 
 ViteExpress.listen(app, PORT, () => {
