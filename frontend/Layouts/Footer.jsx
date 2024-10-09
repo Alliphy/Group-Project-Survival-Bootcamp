@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 export const Footer = () => {
   const navigate = useNavigate();
   const [selectInstructor, setSelectInstructor] = useState("");
-  const [selectCourse, setSelectCourse] = useState("");
   const [selectAllInstructors, setSelectAllInstructors] = useState([]);
   const [email, setEmail] = useState({ email: "" });
   const [firstName, setFirstName] = useState({ firstName: "" });
@@ -106,15 +105,32 @@ export const Footer = () => {
   }
 
   useEffect(() => {
-    fetch("/dummy").then(async (data) => {
+    fetch("/api/all-courses").then(async (data) => {
       const courses = await data.json();
-      console.log(courses);
-
-      setSelectAllInstructors(courses.data);
+      console.log("Courses: ", courses);
+      setCourses(courses);
     });
   }, []);
 
-  console.log(selectAllInstructors);
+  function handleSelectInstructor(e) {
+    const selectedInstructorCourses = [];
+    setSelectInstructor(e.target.value);
+
+    // For future reference, this only works if all the instructors are fetched in order.
+    // If an instructor is deleted, this will NEED to be refactored in order to work.
+    const instructorId = e.target.selectedIndex;
+
+    const index = selectAllInstructors.findIndex((instructor) => {
+      //whatever returns true on findIndex will return the value of index
+      return instructor.firstName === e.target.value;
+    });
+    for (const course of courses) {
+      if (course.instructorId === instructorId) {
+        selectedInstructorCourses.push(course);
+      }
+    }
+    setCoursesToShow(selectedInstructorCourses);
+  }
 
   return (
     <footer>
@@ -124,7 +140,7 @@ export const Footer = () => {
       >
         <p className="sixCapsFont footerContactPTag">Sign Up</p>
 
-        {!isLoggedIn ? (
+        {!isLoggedIn.email ? (
           <div>
             <Link to="/signup">
               <button type="button">Sign Up</button>

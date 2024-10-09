@@ -1,11 +1,9 @@
 import "flatpickr/dist/themes/material_green.css";
 import dayjs from "dayjs";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 
 export const DatePicker = (props) => {
-  console.log(dayjs().format());
-
   const [date, setDate] = useState(dayjs());
   const [avails, setAvails] = useState([]);
 

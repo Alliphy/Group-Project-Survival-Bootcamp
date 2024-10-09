@@ -92,6 +92,63 @@ app.get("/api/all-courses", async (req, res) => {
   res.json(allCourses);
 });
 
+// Gets all "true" availabilities for selected Instructor
+app.post("/api/instructor-avails", async (req, res) => {
+  const { instructor } = req.body;
+  console.log("Req.body for instructor avails: ", req.body);
+
+  let whereClause = {};
+
+  switch (instructor) {
+    case "Ripley":
+      whereClause = { ripley: true };
+      break;
+    case "Strode":
+      whereClause = { strode: true };
+      break;
+    case "Williams":
+      whereClause = { williams: true };
+      break;
+    case "Warren":
+      whereClause = { warrens: true };
+      break;
+    case "Washington":
+      whereClause = { washington: true };
+      break;
+    case "Asakawa":
+      whereClause = { asakawa: true };
+      break;
+    default:
+      console.log(`No instructors found under ${instructor}`);
+      return res.status(404).json({ message: "Instructor not found" });
+  }
+
+  // Finds dates where selected instructor is available
+  const allAvails = await Avail.findAll({
+    attributes: ["date"],
+    where: whereClause,
+  });
+  const parsedAvails = allAvails.map((avail) => avail.dataValues.date);
+  console.log("parsed avails: ", parsedAvails);
+  res.json(parsedAvails);
+});
+
+// Make call to get ALL Instructors
+app.get("/api/instructor-list", async (req, res) => {
+  const allInstructors = await Instructor.findAll({
+    attributes: ["instructor_id", "firstName", "lastName"],
+  });
+  res.json(allInstructors);
+});
+
+// Endpoint for getting ALL courses
+app.get("/api/all-courses", async (req, res) => {
+  const allCourses = await Course.findAll({
+    attributes: ["title", "instructorId"],
+  });
+  res.json(allCourses);
+});
+
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
