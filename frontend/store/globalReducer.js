@@ -3,6 +3,7 @@
 const initialState = {
   availDates: [],
   user: {},
+  instructor: false,
 };
 
 // {type:"UPDATE_DATES", payload:dateItems}
@@ -19,6 +20,11 @@ export default function globalReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      };
+    case "SET_ADMIN":
+      return {
+        ...state,
+        instructor: true,
       };
     case "LOGOUT":
       return {
