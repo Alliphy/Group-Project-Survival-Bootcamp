@@ -1,8 +1,9 @@
 import App from "./pages/App.jsx";
 import { AdministratorPage } from "./pages/AdministratorPage.jsx";
 import { Courses } from "./pages/Courses.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 import { Home } from "./pages/Home.jsx";
-import { Login } from "./pages/LoginPage.jsx";
+import { LoginPage } from "./pages/LoginPage.jsx";
 import { SignUp } from "./pages/SignUp.jsx";
 import "./index.css";
 import globalStore from "./store/store.js";
@@ -15,7 +16,7 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <App />,
-      // errorElement: <ErrorPage/>,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -28,7 +29,7 @@ const router = createBrowserRouter(
         { path: "/admin", element: <AdministratorPage /> },
         {
           path: "/login",
-          element: <Login />,
+          element: <LoginPage />,
         },
         {
           path: "/signUp",

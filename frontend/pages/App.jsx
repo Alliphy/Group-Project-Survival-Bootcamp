@@ -2,8 +2,19 @@ import "../index.css";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { Footer } from "../Layouts/Footer";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+    if (loggedIn) {
+      console.log(loggedIn);
+      dispatch({ type: "SET_USER", payload: loggedIn });
+    }
+  }, [dispatch]);
+
   return (
     <>
       <header>

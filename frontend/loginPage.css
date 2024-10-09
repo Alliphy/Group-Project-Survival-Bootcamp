@@ -4,15 +4,28 @@
   align-items: center;
   place-content: center;
   height: 600px;
+  margin-top: 100px;
 }
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   place-content: center;
   margin: auto;
   width: 300px;
   height: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  margin: auto;
+  width: 300px;
+  height: 550px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -31,6 +44,7 @@ button {
   border-radius: 3px;
   font-size: 16px;
   margin-bottom: 30px;
+  color: rgb(49, 45, 45);
 }
 
 button {
