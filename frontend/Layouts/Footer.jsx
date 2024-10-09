@@ -23,6 +23,37 @@ export const Footer = () => {
     }
   });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/courseSelection", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // firstName,
+          // lastName,
+          // email,
+          selectInstructor,
+          selectCourse,
+          // availability,
+        }),
+      });
+
+      if (response.ok) {
+        // Handle successful login (redirect, set session)
+        console.log("Course Sign Up Successful!");
+        navigate("/courses");
+      } else {
+        console.error("Sign Up for Courses Failed:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
   // Fetches a list of all instructors
   useEffect(() => {
     fetch("/api/instructor-list").then(async (data) => {
@@ -80,7 +111,7 @@ export const Footer = () => {
             </Link>
           </div>
         ) : (
-          <form className="footerContactForm">
+          <form className="footerContactForm" onChange={handleSubmit}>
             <div className="footerFormNameDiv">
               <input placeholder="First Name" type="text"></input>
               <input placeholder="Last Name" type="text"></input>

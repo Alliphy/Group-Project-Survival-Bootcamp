@@ -12,9 +12,6 @@ import {
   Instructor,
 } from "./models/index.js";
 import cors from "cors";
-import Instructor from "./models/instructor.js";
-import Appointment from "./models/appointment.js";
-import { Avail } from "./models/avail.js";
 
 const app = express();
 const PORT = process.env.PORT || 5090;
