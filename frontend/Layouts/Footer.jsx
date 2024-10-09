@@ -10,6 +10,7 @@ export const Footer = () => {
   const navigate = useNavigate();
   const [selectInstructor, setSelectInstructor] = useState("");
   const [selectAllInstructors, setSelectAllInstructors] = useState([]);
+  const [selectCourse, setSelectCourse] = useState("");
   const [email, setEmail] = useState({ email: "" });
   const [firstName, setFirstName] = useState({ firstName: "" });
   const [lastName, setLastName] = useState({ lastName: "" });
@@ -112,26 +113,6 @@ export const Footer = () => {
     });
   }, []);
 
-  function handleSelectInstructor(e) {
-    const selectedInstructorCourses = [];
-    setSelectInstructor(e.target.value);
-
-    // For future reference, this only works if all the instructors are fetched in order.
-    // If an instructor is deleted, this will NEED to be refactored in order to work.
-    const instructorId = e.target.selectedIndex;
-
-    const index = selectAllInstructors.findIndex((instructor) => {
-      //whatever returns true on findIndex will return the value of index
-      return instructor.firstName === e.target.value;
-    });
-    for (const course of courses) {
-      if (course.instructorId === instructorId) {
-        selectedInstructorCourses.push(course);
-      }
-    }
-    setCoursesToShow(selectedInstructorCourses);
-  }
-
   return (
     <footer>
       <div
@@ -192,31 +173,10 @@ export const Footer = () => {
                 name="instructorSelect"
                 type="select"
                 onChange={handleSelectInstructor}
-                // onChange={(e) => {
-                // setSelectInstructor(e.target.value);
-                // console.dir(e.target);
-                // const index = selectAllInstructors.findIndex((instructor) => {
-                //   //whatever returns true on findIndex will return the value of index
-                //   return instructor.firstName === e.target.value;
-                // });
-                // console.log(index);
-
-                // setCoursesToShow(selectAllInstructors[index].Courses);
-                // }}
               >
                 <option value={""} disabled>
                   Select an Instructor
                 </option>
-                {/* {selectAllInstructors.map((instructor, index) => (
-                  <option
-                    data-id={instructor.instructorId}
-                    value={instructor.firstName}
-                    key={instructor.firstName}
-                    defaultValue={index === 0 ? true : false}
-                  >
-                    {instructor.firstName}
-                  </option>
-                ))} */}
 
                 {selectAllInstructors.map((instructor, index) => (
                   <option
@@ -254,15 +214,6 @@ export const Footer = () => {
                   ))}
                 </select>
               )}
-              {/* {coursesToShow.map((courses, index) => (
-                    <option
-                      value={courses.title}
-                      key={courses.title}
-                      defaultValue={index === 0 ? true : false}
-                    >
-                      {courses.title}
-                    </option>
-                  ))} */}
 
               {selectInstructor && selectCourse && (
                 <DatePicker
