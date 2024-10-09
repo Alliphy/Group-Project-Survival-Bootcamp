@@ -2,6 +2,7 @@ import { DatePicker } from "../components/DatePicker.jsx";
 import { useState, useEffect, useCallback } from "react";
 import "flatpickr/dist/themes/material_green.css";
 import dayjs from "dayjs";
+import "../administrator.css";
 
 export const AdministratorPage = (props) => {
   // State to hold the list of courses fetched from the API
@@ -132,7 +133,11 @@ export const AdministratorPage = (props) => {
       {/* Availability calendar */}
       <h2>Availability</h2>
 
-      <DatePicker value={selectedDate.toDate()} availability={[]} />
+      <DatePicker
+        selectInstructor="Ripley"
+        value={selectedDate.toDate()}
+        availability={[]}
+      />
     </div>
   );
 };

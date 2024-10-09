@@ -62,7 +62,7 @@ export const LoginPage = () => {
 
   return (
     <div className="formMasterDiv">
-      {!isLoggedIn && (
+      {!isLoggedIn.email && (
         <form className="login-form" onSubmit={handleSubmit}>
           <label className="login-label">Email:</label>
           <input
@@ -89,7 +89,7 @@ export const LoginPage = () => {
         </form>
       )}
 
-      {isLoggedIn && (
+      {isLoggedIn.email && (
         <div>
           <button onClick={handleLogout}>Log Out</button>
         </div>

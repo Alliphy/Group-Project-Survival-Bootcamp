@@ -4,11 +4,17 @@ import session from "express-session";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
 import "dotenv/config";
-import Client from "./models/client.js";
+import {
+  Appointment,
+  Avail,
+  Client,
+  Course,
+  Instructor,
+} from "./models/index.js";
 import cors from "cors";
 
 const app = express();
-const PORT = 5090;
+const PORT = process.env.PORT || 5090;
 
 ViteExpress.config({
   printViteDevServerHost: true,
@@ -28,6 +34,63 @@ app.use(
   })
 );
 app.use(cors());
+
+// Gets all "true" availabilities for selected Instructor
+app.post("/api/instructor-avails", async (req, res) => {
+  const { instructor } = req.body;
+  console.log("Req.body for instructor avails: ", req.body);
+
+  let whereClause = {};
+
+  switch (instructor) {
+    case "Ripley":
+      whereClause = { ripley: true };
+      break;
+    case "Strode":
+      whereClause = { strode: true };
+      break;
+    case "Williams":
+      whereClause = { williams: true };
+      break;
+    case "Warren":
+      whereClause = { warrens: true };
+      break;
+    case "Washington":
+      whereClause = { washington: true };
+      break;
+    case "Asakawa":
+      whereClause = { asakawa: true };
+      break;
+    default:
+      console.log(`No instructors found under ${instructor}`);
+      return res.status(404).json({ message: "Instructor not found" });
+  }
+
+  // Finds dates where selected instructor is available
+  const allAvails = await Avail.findAll({
+    attributes: ["date"],
+    where: whereClause,
+  });
+  const parsedAvails = allAvails.map((avail) => avail.dataValues.date);
+  console.log("parsed avails: ", parsedAvails);
+  res.json(parsedAvails);
+});
+
+// Make call to get ALL Instructors
+app.get("/api/instructor-list", async (req, res) => {
+  const allInstructors = await Instructor.findAll({
+    attributes: ["instructor_id", "firstName", "lastName"],
+  });
+  res.json(allInstructors);
+});
+
+// Endpoint for getting ALL courses
+app.get("/api/all-courses", async (req, res) => {
+  const allCourses = await Course.findAll({
+    attributes: ["title", "instructorId"],
+  });
+  res.json(allCourses);
+});
 
 app.post("/api/login", async (req, res) => {
   try {
@@ -77,6 +140,17 @@ app.post("/api/signup", async (req, res) => {
   return res.send("user created");
 });
 
+app.post("/api/create-appointment", async (req, res) => {
+  const { date, instructor_id, client_id } = req.body;
+  await Appointment.create({
+    date,
+    instructor_id,
+    client_id,
+  });
+
+  return res.send("appointment created");
+});
+
 // Custom route middleware function that checks if the user is logged in.
 function loginRequired(req, res, next) {
   // console.log("session", req.session); // Log session for debugging
@@ -98,6 +172,46 @@ app.post("/api/logout", (req, res) => {
   req.session.destroy();
   // Send a success response
   res.json({ success: true });
+});
+
+app.delete(
+  "/api/appointment/:appointmentId",
+  loginRequired,
+  async (req, res) => {
+    const appointmentId = req.params.appointmentId; // Extract the appointmentId from the parameters
+
+    try {
+      // Find the appt to be deleted based on apptId
+      const apptToDelete = await Appointment.findByPk(appointmentId);
+
+      if (!apptToDelete) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+
+      // Delete the appointment from the database
+      await apptToDelete.destroy();
+
+      res.status(204).send(); // Send 204 No Content response to indicate successful deletion
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+      res.status(500).json({ message: "Internal server error" }); // Send 500 Internal Server Error response if there's an error
+    }
+  }
+);
+
+app.post("/api/admin/avail", loginRequired, async (req, res) => {
+  const { instructorId } = req.session.user;
+  const { date } = req.body;
+
+  const instructor = await Instructor.findByPk(instructorId);
+  console.log("instructor:", instructor);
+
+  if (!instructor) {
+    return res.status(401).json({ error: "Unauthorized", from: "/avail" }); // Send 401 Unauthorized response if user is not found
+  }
+  const availability = await Avail.create({ date: date });
+
+  res.json(availability); // Send a JSON response containing the newly created post
 });
 
 app.get("/dummy", (req, res) => {

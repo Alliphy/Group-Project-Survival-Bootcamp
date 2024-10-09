@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import "../footer.css";
 import { useNavigate } from "react-router-dom";
 import { Dayjs } from "dayjs";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -16,14 +18,10 @@ export const Footer = () => {
     availability: Date(Dayjs),
   });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const localIsLoggedIn = localStorage.getItem("isLoggedIn");
-    // console.log(localIsLoggedIn); // for debugging purposes
-    if (localIsLoggedIn === "true") {
-      return true;
-    } else {
-      return false;
-    }
+  const [courses, setCourses] = useState([]);
+
+  const isLoggedIn = useSelector((state) => {
+    return state.globalState.user;
   });
 
   const [newCourseClient, setNewCourseClient] = useState({
@@ -68,6 +66,45 @@ export const Footer = () => {
     }
   };
 
+  // Fetches a list of all instructors
+  useEffect(() => {
+    fetch("/api/instructor-list").then(async (data) => {
+      const instructors = await data.json();
+      console.log("Instructors: ", instructors);
+
+      setSelectAllInstructors(instructors);
+    });
+  }, []);
+
+  // Fetches all courses
+  useEffect(() => {
+    fetch("/api/all-courses").then(async (data) => {
+      const courses = await data.json();
+      console.log("Courses: ", courses);
+      setCourses(courses);
+    });
+  }, []);
+
+  function handleSelectInstructor(e) {
+    const selectedInstructorCourses = [];
+    setSelectInstructor(e.target.value);
+
+    // For future reference, this only works if all the instructors are fetched in order.
+    // If an instructor is deleted, this will NEED to be refactored in order to work.
+    const instructorId = e.target.selectedIndex;
+
+    const index = selectAllInstructors.findIndex((instructor) => {
+      //whatever returns true on findIndex will return the value of index
+      return instructor.firstName === e.target.value;
+    });
+    for (const course of courses) {
+      if (course.instructorId === instructorId) {
+        selectedInstructorCourses.push(course);
+      }
+    }
+    setCoursesToShow(selectedInstructorCourses);
+  }
+
   useEffect(() => {
     fetch("/dummy").then(async (data) => {
       const courses = await data.json();
@@ -89,9 +126,13 @@ export const Footer = () => {
 
         {!isLoggedIn ? (
           <div>
-            <button>Sign Up</button>
+            <Link to="/signup">
+              <button type="button">Sign Up</button>
+            </Link>
             <p>Or</p>
-            <button>Login</button>
+            <Link to="/login">
+              <button type="button">Login</button>
+            </Link>
           </div>
         ) : (
           <form className="footerContactForm" onSubmit={handleSubmit}>
@@ -134,22 +175,23 @@ export const Footer = () => {
               <select
                 name="instructorSelect"
                 type="select"
-                onChange={(e) => {
-                  setSelectInstructor(e.target.value);
-                  console.dir(e.target);
-                  const index = selectAllInstructors.findIndex((instructor) => {
-                    //whatever returns true on findIndex will return the value of index
-                    return instructor.firstName === e.target.value;
-                  });
-                  console.log(index);
+                onChange={handleSelectInstructor}
+                // onChange={(e) => {
+                // setSelectInstructor(e.target.value);
+                // console.dir(e.target);
+                // const index = selectAllInstructors.findIndex((instructor) => {
+                //   //whatever returns true on findIndex will return the value of index
+                //   return instructor.firstName === e.target.value;
+                // });
+                // console.log(index);
 
-                  setCoursesToShow(selectAllInstructors[index].Courses);
-                }}
+                // setCoursesToShow(selectAllInstructors[index].Courses);
+                // }}
               >
                 <option value={""} disabled>
                   Select an Instructor
                 </option>
-                {selectAllInstructors.map((instructor, index) => (
+                {/* {selectAllInstructors.map((instructor, index) => (
                   <option
                     data-id={instructor.instructorId}
                     value={instructor.firstName}
@@ -157,6 +199,17 @@ export const Footer = () => {
                     defaultValue={index === 0 ? true : false}
                   >
                     {instructor.firstName}
+                  </option>
+                ))} */}
+
+                {selectAllInstructors.map((instructor, index) => (
+                  <option
+                    data-id={instructor.instructor_id}
+                    value={instructor.lastName}
+                    key={instructor.instructor_id}
+                    defaultValue={index === 0 ? true : false}
+                  >
+                    {instructor.firstName + " " + instructor.lastName}
                   </option>
                 ))}
               </select>
@@ -173,10 +226,11 @@ export const Footer = () => {
                   <option value={""} disabled>
                     Select a Course
                   </option>
+
                   {coursesToShow.map((courses, index) => (
                     <option
                       value={courses.title}
-                      key={courses.title}
+                      key={`${courses.title}-${index}`}
                       defaultValue={index === 0 ? true : false}
                     >
                       {courses.title}
@@ -184,6 +238,16 @@ export const Footer = () => {
                   ))}
                 </select>
               )}
+              {/* {coursesToShow.map((courses, index) => (
+                    <option
+                      value={courses.title}
+                      key={courses.title}
+                      defaultValue={index === 0 ? true : false}
+                    >
+                      {courses.title}
+                    </option>
+                  ))} */}
+
               {selectInstructor && selectCourse && (
                 <DatePicker
                   selectInstructor={selectInstructor}
