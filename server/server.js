@@ -4,7 +4,13 @@ import session from "express-session";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
 import "dotenv/config";
-import Client from "./models/client.js";
+import {
+  Appointment,
+  Avail,
+  Client,
+  Course,
+  Instructor,
+} from "./models/index.js";
 import cors from "cors";
 import Instructor from "./models/instructor.js";
 import Appointment from "./models/appointment.js";
@@ -32,42 +38,62 @@ app.use(
 );
 app.use(cors());
 
-// app.post("/api/adminlogin", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     console.log(req.body);
+// Gets all "true" availabilities for selected Instructor
+app.post("/api/instructor-avails", async (req, res) => {
+  const { instructor } = req.body;
+  console.log("Req.body for instructor avails: ", req.body);
 
-//     const foundInstructor = await Instructor.findOne({ where: { email } });
+  let whereClause = {};
 
-//     if (!foundInstructor) {
-//       return res.status(401).send("Unauthorized");
-//     }
+  switch (instructor) {
+    case "Ripley":
+      whereClause = { ripley: true };
+      break;
+    case "Strode":
+      whereClause = { strode: true };
+      break;
+    case "Williams":
+      whereClause = { williams: true };
+      break;
+    case "Warren":
+      whereClause = { warrens: true };
+      break;
+    case "Washington":
+      whereClause = { washington: true };
+      break;
+    case "Asakawa":
+      whereClause = { asakawa: true };
+      break;
+    default:
+      console.log(`No instructors found under ${instructor}`);
+      return res.status(404).json({ message: "Instructor not found" });
+  }
 
-//     // Check for instructor first
-//     if (foundInstructor) {
-//       if (foundInstructor.password !== password) {
-//         return res.status(401).send("Unauthorized");
-//       }
-//       // Set session for instructor
-//       req.session.logged_in = true;
-//       req.session.user = {
-//         instructorId: foundInstructor.instructorId,
-//         email: foundInstructor.email,
-//         password: foundInstructor.password,
-//       };
+  // Finds dates where selected instructor is available
+  const allAvails = await Avail.findAll({
+    attributes: ["date"],
+    where: whereClause,
+  });
+  const parsedAvails = allAvails.map((avail) => avail.dataValues.date);
+  console.log("parsed avails: ", parsedAvails);
+  res.json(parsedAvails);
+});
 
-//       return res.json({
-//         user: { instructor: true }, // Indicate instructor login
-//         message: "You are now logged in!",
-//         success: true,
-//         session: req.session,
-//       });
-//     }
-//   } catch (e) {
-//     console.log("hit catch");
-//     res.status(500).json({ error: "Server Error" });
-//   }
-// });
+// Make call to get ALL Instructors
+app.get("/api/instructor-list", async (req, res) => {
+  const allInstructors = await Instructor.findAll({
+    attributes: ["instructor_id", "firstName", "lastName"],
+  });
+  res.json(allInstructors);
+});
+
+// Endpoint for getting ALL courses
+app.get("/api/all-courses", async (req, res) => {
+  const allCourses = await Course.findAll({
+    attributes: ["title", "instructorId"],
+  });
+  res.json(allCourses);
+});
 
 app.post("/api/login", async (req, res) => {
   try {
@@ -116,6 +142,17 @@ app.post("/api/signup", async (req, res) => {
   });
 
   return res.send("user created");
+});
+
+app.post("/api/create-appointment", async (req, res) => {
+  const { date, instructor_id, client_id } = req.body;
+  await Appointment.create({
+    date,
+    instructor_id,
+    client_id,
+  });
+
+  return res.send("appointment created");
 });
 
 // Custom route middleware function that checks if the user is logged in.
