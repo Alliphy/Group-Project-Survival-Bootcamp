@@ -39,9 +39,9 @@ export const DatePicker = (props) => {
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Y-m-d",
+        enableTime: false,
         minDate: "today",
         maxDate: new Date().fp_incr(60),
-
         enable: avails,
         locale: {
           firstDayOfWeek: 1, // start week on Monday
