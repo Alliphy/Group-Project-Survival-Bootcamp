@@ -111,6 +111,36 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+input {
+  margin-bottom: 30px;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  color: rgb(49, 45, 45);
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #2b4ed9;
+}
+
 /* CLASSES USED ON MULTIPLE PAGES */
 
 .pageWrapper {
@@ -126,7 +156,8 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 50px;
+  height: 125px;
+  margin-right: 20px;
 }
 
 main {

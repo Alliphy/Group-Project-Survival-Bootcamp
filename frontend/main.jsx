@@ -5,6 +5,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import { Home } from "./pages/Home.jsx";
 import { LoginPage } from "./pages/LoginPage.jsx";
 import LogoutButton from "./components/LogoutButton.jsx";
+import { ClientProfile } from "./pages/ClientProfile.jsx";
 import { SignUp } from "./pages/SignUp.jsx";
 import "./index.css";
 import globalStore from "./store/store.js";
@@ -35,6 +36,10 @@ const router = createBrowserRouter(
         {
           path: "/signUp",
           element: <SignUp />,
+        },
+        {
+          path: "/client",
+          element: <ClientProfile />,
         },
       ],
     },

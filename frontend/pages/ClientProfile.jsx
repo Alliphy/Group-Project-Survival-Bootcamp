@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import "../clientProfile.css";
 
 export const ClientProfile = () => {
   const isLoggedIn = useSelector((state) => {
