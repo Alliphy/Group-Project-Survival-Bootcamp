@@ -40,7 +40,7 @@ export const LoginPage = () => {
         console.log("Login successful!");
         localStorage.setItem("isLoggedIn", JSON.stringify(data.user));
         dispatch({ type: "SET_USER", payload: data.user });
-        navigate("/courses");
+        navigate("/client");
       } else {
         console.error("Login failed:", response.statusText);
       }

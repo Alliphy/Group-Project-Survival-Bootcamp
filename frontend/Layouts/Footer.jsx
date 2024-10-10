@@ -122,7 +122,7 @@ export const Footer = () => {
         <p className="sixCapsFont footerContactPTag">Sign Up</p>
 
         {!isLoggedIn.email ? (
-          <div>
+          <div className="footerLoginForm">
             <Link to="/signup">
               <button type="button">Sign Up</button>
             </Link>
@@ -192,7 +192,7 @@ export const Footer = () => {
               </select>
               {selectInstructor && (
                 <select
-                defaultValue={""}
+                  defaultValue={""}
                   onChange={(e) => {
                     const index = coursesToShow.findIndex((courses) => {
                       return courses.title === e.target.value;
@@ -227,9 +227,7 @@ export const Footer = () => {
               {/* availability: ["2024-10-05"], */}
             </div>
             <div className="footerFormMessageDiv">
-              <button
-              onClick={handleSubmit}
-              >Submit</button>
+              <button onClick={handleSubmit}>Submit</button>
             </div>
           </form>
         )}
