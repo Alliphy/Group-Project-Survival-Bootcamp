@@ -1,24 +1,22 @@
 import { DatePicker } from "../components/DatePicker.jsx";
+import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import "../footer.css";
 import { useNavigate } from "react-router-dom";
-import { Dayjs } from "dayjs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const Footer = () => {
   const navigate = useNavigate();
+
+  const [date, setDate] = useState(dayjs());
+
   const [selectInstructor, setSelectInstructor] = useState("");
   const [selectAllInstructors, setSelectAllInstructors] = useState([]);
-  const [selectCourse, setSelectCourse] = useState("");
-  const [email, setEmail] = useState({ email: "" });
-  const [firstName, setFirstName] = useState({ firstName: "" });
-  const [lastName, setLastName] = useState({ lastName: "" });
-  const [availability, setAvailability] = useState({
-    availability: Date(Dayjs),
-  });
 
   const [courses, setCourses] = useState([]);
+  const [selectCourse, setSelectCourse] = useState("");
+  const [coursesToShow, setCoursesToShow] = useState([]);
 
   const isLoggedIn = useSelector((state) => {
     return state.globalState.user;
@@ -33,30 +31,42 @@ export const Footer = () => {
     availability: [],
   });
 
-  const [coursesToShow, setCoursesToShow] = useState([]);
+  function getInstructorId() {
+    const selectedInstructor = selectAllInstructors.find(
+      (instructor) => instructor.lastName === selectInstructor
+    );
+    return selectedInstructor.instructor_id;
+  }
+
+  function getCourseId() {
+
+    const selectedCourse = courses.find(
+      (course) => course.title === selectCourse.title
+    );
+    return selectedCourse.courseId;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/courseSelection", {
+      const response = await fetch("/api/create-appointment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          selectInstructor,
-          selectCourse,
-          availability,
+          date: date,
+          instructor_id: getInstructorId(),
+          client_id: isLoggedIn.clientId,
+          course_id: getCourseId(),
         }),
       });
 
       if (response.ok) {
         // Handle successful login (redirect, set session)
         console.log("Course Sign Up Successful!");
+        window.alert("Appointment created!");
         navigate("/courses");
       } else {
         console.error("Sign Up for Courses Failed:", response.statusText);
@@ -192,12 +202,11 @@ export const Footer = () => {
               </select>
               {selectInstructor && (
                 <select
-                defaultValue={""}
+                  defaultValue={""}
                   onChange={(e) => {
                     const index = coursesToShow.findIndex((courses) => {
                       return courses.title === e.target.value;
                     });
-                    console.log(index);
                     setSelectCourse(coursesToShow[index]);
                   }}
                 >
@@ -221,15 +230,15 @@ export const Footer = () => {
                 <DatePicker
                   selectInstructor={selectInstructor}
                   availability={selectInstructor.availability}
+                  date={date}
+                  setDate={setDate}
                 />
               )}
               {/* {console.log(selectInstructor.availability)} */}
               {/* availability: ["2024-10-05"], */}
             </div>
             <div className="footerFormMessageDiv">
-              <button
-              onClick={handleSubmit}
-              >Submit</button>
+              <button>Submit</button>
             </div>
           </form>
         )}
