@@ -27,6 +27,6 @@ Avail.belongsToMany(Client, {
 });
 
 Course.hasMany(Appointment, { foreignKey: "courseId" });
-Appointment.belongsTo(Course, { foreignKey: "courseId" })
+Appointment.belongsTo(Course);
 
 export { Appointment, Avail, Client, Course, Instructor };

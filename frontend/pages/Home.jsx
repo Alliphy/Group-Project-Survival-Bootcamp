@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instructors } from "./InstructorsUi.jsx";
 import "../home.css";
+import { Footer } from "../Layouts/Footer.jsx";
 
 const Home = () => {
   return (
@@ -38,6 +39,7 @@ const Home = () => {
         </div>
       </section>
       <Instructors />
+      <Footer />
     </div>
   );
 };

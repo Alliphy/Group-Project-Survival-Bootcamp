@@ -68,7 +68,7 @@ app.post("/api/instructor-avails", async (req, res) => {
 
   // Finds dates where selected instructor is available
   const allAvails = await Avail.findAll({
-    attributes: ["date"],
+    // attributes: ["date"],
     where: whereClause,
   });
   const parsedAvails = allAvails.map((avail) => avail.dataValues.date);
@@ -99,6 +99,15 @@ app.get("/api/all-courses", async (req, res) => {
     attributes: ["title", "instructorId"],
   });
   res.json(allCourses);
+});
+
+app.get("/api/instructor-course/:instructorId", async (req, res) => {
+  const userId = req.params.instructorId;
+
+  const courses = await Course.findAll({
+    where: { instructorId: userId },
+  });
+  res.json(courses);
 });
 
 app.post("/api/login", async (req, res) => {

@@ -6,12 +6,6 @@ import "../administrator.css";
 import { useSelector } from "react-redux";
 
 export const AdministratorPage = (props) => {
-  // State to hold the current instructor's information
-  const [instructorData, setInstructorData] = useState({
-    firstName: "",
-    lastName: "",
-  });
-
   const [currentInstructor, setCurrentInstructor] = useState({
     firstName: "",
     lastName: "",
@@ -59,11 +53,11 @@ export const AdministratorPage = (props) => {
   // };
   // Fetches a list of all instructors
   useEffect(() => {
-    fetch("/api/current-instructor").then(async (data) => {
-      const instructor = await data.json();
-      console.log("Instructor: ", instructor);
+    fetch(`/api/instructor-course/${courseId}`).then(async (data) => {
+      const courses = await data.json();
+      console.log("courses: ", courses);
 
-      setCurrentInstructor(instructor);
+      setCourses(courses);
     });
   }, []);
 
