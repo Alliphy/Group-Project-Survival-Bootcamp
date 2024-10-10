@@ -72,7 +72,6 @@ app.post("/api/instructor-avails", async (req, res) => {
     where: whereClause,
   });
   const parsedAvails = allAvails.map((avail) => avail.dataValues.date);
-  console.log("parsed avails: ", parsedAvails);
   res.json(parsedAvails);
 });
 
@@ -96,7 +95,7 @@ app.get("/api/instructor-list", async (req, res) => {
 // Endpoint for getting ALL courses
 app.get("/api/all-courses", async (req, res) => {
   const allCourses = await Course.findAll({
-    attributes: ["title", "instructorId"],
+    attributes: ["courseId", "title", "instructorId"],
   });
   res.json(allCourses);
 });
@@ -167,25 +166,12 @@ app.post("/api/signup", async (req, res) => {
   return res.send("user created");
 });
 
-app.post("/api/create-appointment", loginRequired, async (req, res) => {
-  const { date, instructor_id, client_id, course_id } = req.body;
-  await Appointment.create({
-    date,
-    instructor_id,
-    client_id,
-    course_id,
-  });
-
-  return res.send("appointment created");
-});
-
 // Custom route middleware function that checks if the user is logged in.
 function loginRequired(req, res, next) {
   // console.log("session", req.session); // Log session for debugging
-
+  
   // Check if user is logged in by checking if the user ID exists in the session
-
-  if (!req.session.user.instructorId || !req.session.user.clientId) {
+  if (!req?.session?.user?.instructorId || !req?.session?.user?.clientId) {
     // Send 401 Unauthorized response if not logged in
     res.status(401).json({ error: "Unauthorized", from: "middleware" });
   } else {
@@ -193,6 +179,19 @@ function loginRequired(req, res, next) {
   }
 }
 // Note the `loginRequired` argument passed to the routes below!
+
+app.post("/api/create-appointment", async (req, res) => {
+  const { date, instructor_id, client_id, course_id, } = req.body;
+  console.log( { date, instructor_id, client_id, course_id, } );
+  await Appointment.create({
+    date: date,
+    instructorId: instructor_id,
+    clientId: client_id,
+    courseId: course_id,
+  });
+  
+  return res.send("appointment created");
+});
 
 app.post("/api/logout", (req, res) => {
   console.log("hit logout");
