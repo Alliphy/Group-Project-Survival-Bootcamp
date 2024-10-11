@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 export const AdministratorPage = (props) => {
   const instructorName = useSelector(
-    (state) => state.globalState.user.firstName
+    (state) => state.globalState.user.lastName
   );
   const [currentInstructor, setCurrentInstructor] = useState({
     firstName: "",
@@ -28,29 +28,39 @@ export const AdministratorPage = (props) => {
     return state.globalState.user;
   });
 
-  // Function to fetch appointments for a selected course
-  const fetchAppointments = useCallback(async (courseId) => {
-    if (!courseId) return;
+  useEffect(() => {
+    fetch("/api/my-appointments").then(async (data) => {
+      const appointments = await data.json();
 
-    try {
-      const response = await fetch(`/api/appointments`, {
-        method: "GET", // Use GET to fetch appointments
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      console.log("Appointments", appointments);
 
-      if (!response.ok) {
-        throw new Error(`Error fetching appointments: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setAppointments(data.appointments);
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-    }
+      setAppointments(appointments);
+    });
   }, []);
+
+  // Function to fetch appointments for a selected course
+  // const fetchAppointments = useCallback(async (courseId) => {
+  //   if (!courseId) return;
+
+  //   try {
+  //     const response = await fetch(`/api/appointments`, {
+  //       method: "GET", // Use GET to fetch appointments
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Error fetching appointments: ${response.statusText}`);
+  //     }
+
+  //     const data = await response.json();
+  //     setAppointments(data.appointments);
+  //   } catch (error) {
+  //     console.error("Error fetching appointments:", error);
+  //   }
+  // }, []);
 
   // Function to handle date selection in the datepicker
   // const handleDateChange = (selectedDates) => {
@@ -68,11 +78,11 @@ export const AdministratorPage = (props) => {
 
   console.log(currentInstructor);
 
-  useEffect(() => {
-    if (selectedCourseId) {
-      fetchAppointments(selectedCourseId);
-    }
-  }, [selectedCourseId, fetchAppointments]);
+  // useEffect(() => {
+  //   if (selectedCourseId) {
+  //     fetchAppointments(selectedCourseId);
+  //   }
+  // }, [selectedCourseId, fetchAppointments]);
 
   return (
     isLoggedIn.email && (
@@ -86,7 +96,7 @@ export const AdministratorPage = (props) => {
           selectInstructor={instructorName}
           date={date}
           setDate={setDate}
-          availability={[]}
+          availability={appointments}
         />
       </div>
     )

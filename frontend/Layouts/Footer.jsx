@@ -33,6 +33,7 @@ export const Footer = () => {
     const selectedCourse = courses.find(
       (course) => course.title === selectCourse.title
     );
+    console.log("selected course:", selectedCourse);
     return selectedCourse.courseId;
   }
 

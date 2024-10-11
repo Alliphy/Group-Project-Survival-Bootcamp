@@ -18,6 +18,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  color: inherit;
+}
+
 /* FONT */
 
 .libre-baskerville-regular {
@@ -127,7 +131,6 @@ button {
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 16px;
-  color: rgb(49, 45, 45);
 }
 
 button {

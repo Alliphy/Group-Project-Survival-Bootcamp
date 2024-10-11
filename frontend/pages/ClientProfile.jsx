@@ -1,12 +1,24 @@
 import { useSelector } from "react-redux";
 import "../clientProfile.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const ClientProfile = () => {
   const isLoggedIn = useSelector((state) => {
     return state.globalState.user;
   });
+
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/my-appointments").then(async (data) => {
+      const appointments = await data.json();
+
+      console.log("Appointments", appointments);
+
+      setAppointments(appointments);
+    });
+  }, []);
 
   useEffect(() => {
     const userKeys = Object.keys(isLoggedIn);
@@ -24,6 +36,7 @@ export const ClientProfile = () => {
         Welcome, {isLoggedIn.firstName} {isLoggedIn.lastName}
       </h2>
       <p>Appointment Data</p>
+      <div></div>
     </div>
   ) : (
     <div className="unauthorized-profile-page">
