@@ -22,15 +22,6 @@ export const Footer = () => {
     return state.globalState.user;
   });
 
-  const [newCourseClient, setNewCourseClient] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    selectInstructor: [],
-    selectCourse: [],
-    availability: [],
-  });
-
   function getInstructorId() {
     const selectedInstructor = selectAllInstructors.find(
       (instructor) => instructor.lastName === selectInstructor
