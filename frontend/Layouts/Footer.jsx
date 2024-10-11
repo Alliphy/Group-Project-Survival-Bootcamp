@@ -128,7 +128,7 @@ export const Footer = () => {
         className="footerMasterDiv"
         style={{ backgroundImage: "url('/darkendTreeHands.svg')" }}
       >
-        <p className="sixCapsFont footerContactPTag">Sign Up</p>
+        <p className="sixCapsFont footerContactPTag">Schedule Appointment</p>
 
         {!isLoggedIn.email ? (
           <div className="footerLoginForm">
@@ -143,7 +143,7 @@ export const Footer = () => {
         ) : (
           <form className="footerContactForm" onSubmit={handleSubmit}>
             <div className="footerFormNameDiv">
-              <input
+              {/* <input
                 placeholder="First Name"
                 type="text"
                 value={newCourseClient.firstName}
@@ -153,8 +153,8 @@ export const Footer = () => {
                     firstName: e.target.value,
                   }))
                 }
-              ></input>
-              <input
+              ></input> */}
+              {/* <input
                 placeholder="Last Name"
                 type="text"
                 value={newCourseClient.lastName}
@@ -163,11 +163,11 @@ export const Footer = () => {
                     ...prev,
                     lastName: e.target.value,
                   }))
-                }
-              ></input>
+                } */}
+              {/* ></input> */}
             </div>
             <div className="footerFormEmailSelectDiv">
-              <input
+              {/* <input
                 placeholder="Email"
                 type="text"
                 value={newCourseClient.email}
@@ -177,7 +177,7 @@ export const Footer = () => {
                     email: e.target.value,
                   }))
                 }
-              ></input>
+              ></input> */}
               <select
                 name="instructorSelect"
                 type="select"
