@@ -39,7 +39,6 @@ export const Footer = () => {
   }
 
   function getCourseId() {
-
     const selectedCourse = courses.find(
       (course) => course.title === selectCourse.title
     );
@@ -132,7 +131,7 @@ export const Footer = () => {
         <p className="sixCapsFont footerContactPTag">Sign Up</p>
 
         {!isLoggedIn.email ? (
-          <div>
+          <div className="footerLoginForm">
             <Link to="/signup">
               <button type="button">Sign Up</button>
             </Link>
@@ -238,7 +237,7 @@ export const Footer = () => {
               {/* availability: ["2024-10-05"], */}
             </div>
             <div className="footerFormMessageDiv">
-              <button>Submit</button>
+              <button onClick={handleSubmit}>Submit</button>
             </div>
           </form>
         )}

@@ -1,8 +1,25 @@
+@media screen and (max-width: 900px) {
+  .courseContainerDiv {
+    flex-wrap: wrap;
+    place-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .courseInstructorTitleImgDiv {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .courseContainerDiv {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  place-content: center;
 
   h2 {
     font-size: 78px;
@@ -13,19 +30,12 @@
   }
 }
 
-@media screen and (max-width: 900px) {
-  .courseContainerDiv {
-    flex-wrap: wrap;
-    place-content: center;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .courseInstructorTitleImgDiv {
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
+.courseInstructorName {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
 }
 
 .selectInstructorDiv {

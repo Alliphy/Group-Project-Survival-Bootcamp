@@ -7,7 +7,7 @@ const Courses = () => {
       <main className="pageWrapper courseMasterDiv">
         <div className="selectInstructorDiv">
           <div className="courseTitlesDiv sixCapsFont">
-            <p>Find a Course</p>
+            <p className="sixCapsFont">Find a Course</p>
           </div>
           <div className="courseContainerDiv">
             <div className="courseInstructorTitleImgDiv">
@@ -18,8 +18,10 @@ const Courses = () => {
               />
             </div>
             <div className="courseDescriptionDiv">
-              <h2 className="sixCapsFont">Ellen Ripley</h2>
-              <p className="sixCapsFontSmaller">Alien</p>
+              <div className="courseInstructorName">
+                <h2 className="sixCapsFont">Ellen Ripley</h2>
+                <p className="sixCapsFontSmaller">Alien</p>
+              </div>
               <p>Course 1: Alien Survival</p>
               <p>Price: $230</p>
               <p>
@@ -167,6 +169,7 @@ const Courses = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

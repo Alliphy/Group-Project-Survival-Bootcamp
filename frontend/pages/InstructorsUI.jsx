@@ -7,8 +7,8 @@ const Instructors = () => {
         <section className="instructorSection">
           <h2 className="sixCapsFont pb-5">Instructors</h2>
           <div className="instructorLabelDiv">
-            <h3 className="sixCapsFont">Ellen Ripley</h3>
-            <h3 className="sixCapsFont movieTitle">Aliens</h3>
+            <p className="sixCapsFont instructorTitles">Ellen Ripley</p>
+            <p className="sixCapsFont instructorTitles">Aliens</p>
           </div>
           <div className="instructorMasterDiv">
             <div className="bulletPointAndImgDiv">
@@ -37,15 +37,11 @@ const Instructors = () => {
                       leadership skills and the ability to inspire and motivate
                       others to work together.{" "}
                     </li>
-                    <li>
-                      Resilience and adaptability: Staying calm under pressure,
-                      adapting to changing circumstances, and never giving up.
-                    </li>
                   </div>
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               Ellen Ripley, a former Warrant Officer and commercial spacecraft
               pilot, has become a legend in the horror movie world. Her survival
               against the deadly Xenomorphs in the sci-fi horror film Aliens
@@ -62,8 +58,8 @@ const Instructors = () => {
 
         <section className="instructorSection">
           <div className="instructorLabelDiv">
-            <h3 className="sixCapsFont">Laurie Strode</h3>
-            <h3 className="sixCapsFont movieTitle">Halloween Franchise</h3>
+            <p className="instructorTitle sixCapsFont">Laurie Strode</p>
+            <p className="sixCapsFont instructorTitle">Halloween Franchise</p>
           </div>
           <div className="instructorMasterDiv">
             <div className="bulletPointAndImgDiv">
@@ -93,7 +89,7 @@ const Instructors = () => {
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               Laurie Strode, a survivor of multiple encounters with the infamous
               Michael Myers, brings a unique perspective to our course on
               surviving the slasher. Having faced unimaginable horror, she has
@@ -135,15 +131,11 @@ const Instructors = () => {
                       creative solutions to perilous problems. Find a use out of
                       what is nearby.
                     </li>
-                    <li>
-                      Resilience and adaptability: Staying calm under pressure,
-                      adapting to changing circumstances, and never giving up.
-                    </li>
                   </div>
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               A chainsaw-wielding legend in the fight against demonic forces,
               Ash Williams brings a blend of humor and horror to our course on
               surviving demons and deadites. His countless battles with the
@@ -189,7 +181,7 @@ const Instructors = () => {
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               Renowned paranormal investigators Ed and Lorraine Warren bring
               decades of experience and expertise to our course on surviving the
               paranormal. Their investigations into haunted locations have given
@@ -210,7 +202,7 @@ const Instructors = () => {
             <div className="bulletPointAndImgDiv">
               <div>
                 <div
-                  alt="image of Ellen Ripley from Aliens film"
+                  alt="image of Ash Williams"
                   className="instructorImgsDiv"
                   style={{
                     backgroundImage: "url('./ChrisWashington.svg')",
@@ -220,24 +212,24 @@ const Instructors = () => {
                   <div className="listDiv">
                     <li>
                       Critical thinking: Ability to analyze situations and
-                      identify hidden threats. Ability to keep cool when under
-                      mental duress.
+                      identify hidden threats. Ability to keep cool under mental
+                      duress.
                     </li>
                     <li>
                       Observation skills: Keen eye for detail and subtle clues.
                       Suitable process to observe those around you and their
-                      truest intentions.
+                      true intentions.
                     </li>
                     <li>
-                      Self-preservation: Instinctive drive to protect oneself
-                      from harm. Trusting a gut feeling and assessing if the
-                      situation is safe.
+                      Self-preservation: Drive to protect oneself from harm.
+                      Trusting a gut feeling and assessing if the situation is
+                      safe.
                     </li>
                   </div>
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               As a survivor of a sinister social experiment, Chris Washington
               brings a unique perspective to our course on surviving the
               suburbs. His experience with the sinister intentions of a
@@ -267,25 +259,24 @@ const Instructors = () => {
                   {" "}
                   <div className="listDiv">
                     <li>
-                      Supernatural knowledge: Understanding of the rules and
-                      dangers of the paranormal. Strategies developed for
-                      surviving being targeted by a demonic spirit.
+                      Supernatural knowledge: Strategies developed surviving
+                      being targeted by a demonic spirit.
                     </li>
                     <li>
                       Cautionary tales: Real-world examples of the consequences
-                      of ignoring supernatural warnings. Ability to acknowledge
-                      when to take action against spiritual powers.
+                      of ignoring supernatural warnings. Acknowledge when to
+                      take action against spiritual powers.
                     </li>
                     <li>
                       Intuition and foresight: Ability to sense impending danger
-                      and take preventative measures. Using your mental skill as
-                      apposed to physical skill to fight the enemy.
+                      to take preventative measures. Using your mental skill as
+                      to fight the enemy.
                     </li>
                   </div>
                 </div>
               </div>
             </div>
-            <p>
+            <p className="instructorDescription">
               As a survivor of the cursed videotape, Yoichi Asakawa brings a
               chilling firsthand account to our course on surviving supernatural
               horrors. His experience with the malevolent Sadako Yamamura has

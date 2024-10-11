@@ -2,6 +2,16 @@
   padding-bottom: 5%;
 }
 
+.footerLoginForm {
+  button {
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
 .footerMasterDiv {
   display: flex;
   flex-direction: column;
@@ -63,7 +73,7 @@
   width: 100%;
   outline: none;
 
-  input {
-    margin-top: 10px;
+  button {
+    width: 125px;
   }
 }

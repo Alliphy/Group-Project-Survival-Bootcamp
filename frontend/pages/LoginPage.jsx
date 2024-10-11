@@ -13,6 +13,9 @@ export const LoginPage = () => {
   const isLoggedIn = useSelector((state) => {
     return state.globalState.user;
   });
+  const admin = useSelector((state) => {
+    return state.globalState.instructor;
+  });
 
   console.log(isLoggedIn);
 
@@ -40,7 +43,15 @@ export const LoginPage = () => {
         console.log("Login successful!");
         localStorage.setItem("isLoggedIn", JSON.stringify(data.user));
         dispatch({ type: "SET_USER", payload: data.user });
-        navigate("/courses");
+        const userKeys = Object.keys(data.user);
+        console.log(userKeys);
+        if (userKeys.includes("instructorId")) {
+          dispatch({ type: "SET_ADMIN" });
+          navigate("/admin");
+          console.log("hit set admin!!");
+        } else {
+          navigate("/client");
+        }
       } else {
         console.error("Login failed:", response.statusText);
       }
