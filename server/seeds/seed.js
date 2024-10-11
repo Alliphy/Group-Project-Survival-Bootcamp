@@ -124,16 +124,6 @@ const supernaturalSurvival = await Course.create({
   price: 250,
 });
 
-const testAppointment = await Appointment.create({
-  date: "1999-12-31",
-});
-
-const testAvail = await Avail.create({
-  date: "2000-01-01",
-});
-
-await instructorRipley.addAvail(testAvail, { through: testAppointment });
-
 const getWeekdayObjects = () => {
   const startDate = new Date(); // Today's date
   const endDate = new Date("2024-11-30"); // End of November 2024
