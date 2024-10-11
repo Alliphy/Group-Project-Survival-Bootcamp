@@ -38,7 +38,7 @@ app.use(cors());
 // Gets all "true" availabilities for selected Instructor
 app.post("/api/instructor-avails", async (req, res) => {
   const { instructor } = req.body;
-  console.log("Req.body for instructor avails: ", req.body);
+  // console.log("Req.body for instructor avails: ", req.body);
 
   let whereClause = {};
 
@@ -112,7 +112,7 @@ app.get("/api/instructor-course/:instructorId", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     let user;
     const foundUser = await Client.findOne({ where: { email } });
 
@@ -131,9 +131,16 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).send("Unauthorized");
     }
 
+    const userKeys = Object.keys(user.dataValues);
+    // console.log(userKeys);
+    if (userKeys.includes("instructorId")) {
+      req.session.instructor = true;
+      console.log("Hit isInstructor");
+    }
+
     req.session.logged_in = true;
     req.session.user = {
-      userId: user.userId,
+      userId: user.clientId || user.instructorId,
       email: user.email,
       password: user.password,
     };
@@ -169,7 +176,7 @@ app.post("/api/signup", async (req, res) => {
 // Custom route middleware function that checks if the user is logged in.
 function loginRequired(req, res, next) {
   // console.log("session", req.session); // Log session for debugging
-  
+
   // Check if user is logged in by checking if the user ID exists in the session
   if (!req?.session?.user?.instructorId || !req?.session?.user?.clientId) {
     // Send 401 Unauthorized response if not logged in
@@ -181,15 +188,15 @@ function loginRequired(req, res, next) {
 // Note the `loginRequired` argument passed to the routes below!
 
 app.post("/api/create-appointment", async (req, res) => {
-  const { date, instructor_id, client_id, course_id, } = req.body;
-  console.log( { date, instructor_id, client_id, course_id, } );
+  const { date, instructor_id, client_id, course_id } = req.body;
+  // console.log({ date, instructor_id, client_id, course_id });
   await Appointment.create({
     date: date,
     instructorId: instructor_id,
     clientId: client_id,
     courseId: course_id,
   });
-  
+
   return res.send("appointment created");
 });
 
@@ -199,6 +206,28 @@ app.post("/api/logout", (req, res) => {
   req.session.destroy();
   // Send a success response
   res.json({ success: true });
+});
+
+app.get("/api/my-appointments", async (req, res) => {
+  const userId = req.session.user.userId;
+  console.log(req.session);
+  try {
+    let appointments;
+
+    if (req.session.instructor) {
+      appointments = await Appointment.findAll({
+        where: { instructorId: userId },
+      });
+    } else {
+      appointments = await Appointment.findAll({
+        where: { clientId: userId },
+      });
+    }
+    // console.log(appointments);
+    return res.json(appointments);
+  } catch (error) {
+    console.error("error getting appointments", error);
+  }
 });
 
 app.delete(
