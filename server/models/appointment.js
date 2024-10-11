@@ -10,6 +10,15 @@ const Appointment = db.define("Appointment", {
   date: {
     type: Sequelize.DataTypes.DATEONLY,
   },
+  instructorId: {
+    type: Sequelize.DataTypes.INTEGER,
+  },
+  clientId: {
+    type: Sequelize.DataTypes.INTEGER,
+  },
+  courseId: {
+    type: Sequelize.DataTypes.INTEGER,
+  },
 });
 
 export default Appointment;
