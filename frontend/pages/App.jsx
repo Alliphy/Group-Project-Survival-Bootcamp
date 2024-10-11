@@ -30,6 +30,10 @@ function App() {
     return state.globalState.user;
   });
 
+  const admin = useSelector((state) => {
+    return state.globalState.instructor;
+  });
+
   const handleLogout = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     const res = await axios.post("/api/logout"); // Send a POST request to the logout API endpoint
@@ -56,8 +60,12 @@ function App() {
           <div className="navLinkContainer">
             <Link to="/">Home</Link>
             <Link to="/courses">Courses</Link>
-            <Link to="/client">Profile</Link>
-            <button onClick={handleLogout}>Logout</button>
+            {!admin ? (
+              <Link to="/client">Profile</Link>
+            ) : (
+              <Link to="/admin">Profile</Link>
+            )}
+            <Link onClick={handleLogout}>Logout</Link>
           </div>
         </header>
       )}
