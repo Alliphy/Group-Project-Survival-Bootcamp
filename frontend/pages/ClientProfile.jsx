@@ -36,7 +36,13 @@ export const ClientProfile = () => {
         Welcome, {isLoggedIn.firstName} {isLoggedIn.lastName}
       </h2>
       <p>Appointment Data</p>
-      <div></div>
+      <div>
+        {appointments.map((appointment) => (
+          <div key={appointment.appointmentId}>
+            <p>{new Date(appointment.date).toLocaleString()}</p>
+          </div>
+        ))}
+      </div>
     </div>
   ) : (
     <div className="unauthorized-profile-page">

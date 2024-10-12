@@ -22,10 +22,8 @@
 }
 
 .signUpLink {
-  width: 10rem;
-  height: 5rem;
-  color: #242424;
-  background-color: #535bf2;
+  color: #f2efef;
+  background-color: #893298;
   border-radius: 1rem;
   font-size: 50px;
   text-align: center;
@@ -34,7 +32,7 @@
 }
 
 .signUpLink:hover {
-  background-color: #1d1b1b !important;
+  background-color: #2b4ed9 !important;
 }
 
 .signUpLink:active {

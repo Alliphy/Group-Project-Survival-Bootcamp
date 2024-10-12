@@ -18,10 +18,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-input {
-  color: inherit;
-}
-
 /* FONT */
 
 .libre-baskerville-regular {
@@ -87,13 +83,17 @@ body {
   min-width: 320px;
   min-height: 100vh;
   height: fit-content;
-  color: rgba(217, 217, 215, 0.955);
   background-color: #242424;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+input {
+  color: inherit !important;
+  margin-bottom: 30px;
 }
 
 button {
@@ -120,10 +120,6 @@ label {
   display: block;
 }
 
-input {
-  margin-bottom: 30px;
-}
-
 input,
 button {
   width: 100%;
@@ -134,7 +130,6 @@ button {
 }
 
 button {
-  background-color: #4caf50;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -148,19 +143,23 @@ button:hover {
 
 .pageWrapper {
   margin-top: 50px;
+  color: rgba(217, 217, 215, 0.955);
 }
 
 /* ------ App.jsx ---------- */
 
 header {
   width: 100%;
-  position: absolute;
+  position: fixed;
   right: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 125px;
-  margin-right: 20px;
+  height: 80px;
+  padding-right: 20px;
+  background-color: #1a1a1a;
+  color: rgba(217, 217, 215, 0.955);
+  z-index: 100;
 }
 
 main {
@@ -193,4 +192,5 @@ main {
   justify-content: center;
   align-items: center;
   text-shadow: #181717;
+  color: rgba(217, 217, 215, 0.955);
 }

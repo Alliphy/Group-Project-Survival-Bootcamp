@@ -78,15 +78,6 @@ export const Footer = () => {
     });
   }, []);
 
-  // Fetches all courses
-  useEffect(() => {
-    fetch("/api/all-courses").then(async (data) => {
-      const courses = await data.json();
-      console.log("Courses: ", courses);
-      setCourses(courses);
-    });
-  }, []);
-
   function handleSelectInstructor(e) {
     const instructor = e.target.value;
     const selectedInstructorCourses = [];
@@ -147,42 +138,8 @@ export const Footer = () => {
           </div>
         ) : (
           <form className="footerContactForm" onSubmit={handleSubmit}>
-            <div className="footerFormNameDiv">
-              {/* <input
-                placeholder="First Name"
-                type="text"
-                value={newCourseClient.firstName}
-                onChange={(e) =>
-                  setNewCourseClient((prev) => ({
-                    ...prev,
-                    firstName: e.target.value,
-                  }))
-                }
-              ></input> */}
-              {/* <input
-                placeholder="Last Name"
-                type="text"
-                value={newCourseClient.lastName}
-                onChange={(e) =>
-                  setNewCourseClient((prev) => ({
-                    ...prev,
-                    lastName: e.target.value,
-                  }))
-                } */}
-              {/* ></input> */}
-            </div>
+            <div className="footerFormNameDiv"></div>
             <div className="footerFormEmailSelectDiv">
-              {/* <input
-                placeholder="Email"
-                type="text"
-                value={newCourseClient.email}
-                onChange={(e) =>
-                  setNewCourseClient((prev) => ({
-                    ...prev,
-                    email: e.target.value,
-                  }))
-                }
-              ></input> */}
               <select
                 name="instructorSelect"
                 type="select"
@@ -240,8 +197,6 @@ export const Footer = () => {
                   setAvails={setAvails}
                 />
               )}
-              {/* {console.log(selectInstructor.availability)} */}
-              {/* availability: ["2024-10-05"], */}
             </div>
             <div className="footerFormMessageDiv">
               <button onClick={handleSubmit}>Submit</button>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 
 export const DatePicker = (props) => {
-  const {date, setDate, avails, setAvails } = props
+  const { date, setDate, avails, setAvails } = props;
 
   const flatpickr = useRef(null);
 

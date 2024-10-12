@@ -34,10 +34,11 @@
 - Create a backend server using Express.js and integrate with the database.
 
 - Implement API endpoints for user authentication, course data retrieval, and appointment scheduling.
-Frontend Development:
+
+  Frontend Development:
 
 - Start the development server: npm start
-The application will be available at http://localhost:5090/
+  The application will be available at http://localhost:5090/
 
 ### Folder Structure
 
@@ -73,8 +74,8 @@ The application will be available at http://localhost:5090/
 #### Additional Notes
 
 - This is a basic implementation and can be further extended with features like course reviews, instructor bios, and payment processing.
-The backend and database setup are not included in this repository.
-File Descriptions:
+  The backend and database setup are not included in this repository.
+  File Descriptions:
 
 - InstructorsUI.jsx: Displays information about instructors, including their names, titles, descriptions, and images.
 - LoginPage.jsx: Handles user login functionality, allowing users to enter their email and password to access the application.
