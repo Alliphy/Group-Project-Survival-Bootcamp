@@ -18,7 +18,7 @@
 
 ## Technologies
 
-- Frontend: React, React Router DOM, Redux, Tailwind
+- Frontend: React, React Router DOM, Redux, Tailwind (kind of)
 
 ## Installation
 
@@ -27,17 +27,9 @@
 
 ### Usage
 
-- Backend Setup (not included):
+- Frontend Development:
 
-- Set up a PostgreSQL database.
-
-- Create a backend server using Express.js and integrate with the database.
-
-- Implement API endpoints for user authentication, course data retrieval, and appointment scheduling.
-
-  Frontend Development:
-
-- Start the development server: npm start
+- Start the development server: npm run dev
   The application will be available at http://localhost:5090/
 
 ### Folder Structure
@@ -45,12 +37,13 @@
 - package.json: Contains project dependencies and scripts.
 - src: Contains the React application source code.
 - App.jsx: The main application component.
-- components: Reusable React components.
+- main.jsx: The router for the application.
+- - components: Reusable React components.
 - DatePicker.jsx: Date picker component for appointment scheduling.
 - LogoutButton.jsx: Button component for user logout.
-- Layouts: Layout components.
+- - Layouts: Layout components.
 - Footer.jsx: Footer component that dynamically changes based on user login status.
-- pages: Pages of the application.
+- - pages: Pages of the application.
 - AdministratorPage.jsx: Page for instructors to view appointments.
 - ClientProfile.jsx: Page for clients to view appointments.
 - Courses.jsx: Page displaying course information.
@@ -74,7 +67,6 @@
 #### Additional Notes
 
 - This is a basic implementation and can be further extended with features like course reviews, instructor bios, and payment processing.
-  The backend and database setup are not included in this repository.
   File Descriptions:
 
 - InstructorsUI.jsx: Displays information about instructors, including their names, titles, descriptions, and images.
@@ -84,4 +76,5 @@
 - store.js: Configures the Redux store for state management.
 - db.js: Handles the connection to the PostgreSQL database.
 - seed.js: Populates the database with initial data (instructors, courses, availabilities) for testing purposes.
-- server.js: (Not included) The backend server that handles API requests for user authentication, course data retrieval, and appointment scheduling.
+- server.js: The backend server that handles API requests for user authentication, course data retrieval, and appointment scheduling.
+
