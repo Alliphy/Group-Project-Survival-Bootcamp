@@ -154,13 +154,15 @@ button:hover {
 
 header {
   width: 100%;
-  position: absolute;
+  position: fixed;
   right: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 125px;
-  margin-right: 20px;
+  height: 80px;
+  padding-right: 20px;
+  background-color: #1a1a1a;
+  z-index: 100;
 }
 
 main {

@@ -6,9 +6,9 @@ import "../administrator.css";
 import { useSelector } from "react-redux";
 
 export const AdministratorPage = (props) => {
-  // const instructorName = useSelector(
-  //   (state) => state.globalState.user.lastName
-  // );
+  const instructorName = useSelector(
+    (state) => state.globalState.user.lastName
+  );
 
   const isLoggedIn = useSelector((state) => {
     return state.globalState.user.userId;
@@ -26,15 +26,15 @@ export const AdministratorPage = (props) => {
   // State to hold the list of appointments for a selected course
   const [appointments, setAppointments] = useState([]);
 
-  useEffect(() => {
-    const userKeys = Object.keys(isLoggedIn);
-    if (userKeys.includes("instructorId")) {
-      console.log("instructor is logged in");
-      return;
-    } else {
-      console.log("Not authorized");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userKeys = Object.keys(isLoggedIn);
+  //   if (userKeys.includes("instructorId")) {
+  //     console.log("instructor is logged in");
+  //     return;
+  //   } else {
+  //     console.log("Not authorized");
+  //   }
+  // }, []);
 
   useEffect(() => {
     fetch("/api/all-courses").then(async (data) => {

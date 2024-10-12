@@ -4,7 +4,6 @@ import { Courses } from "./pages/Courses.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import { Home } from "./pages/Home.jsx";
 import { LoginPage } from "./pages/LoginPage.jsx";
-import LogoutButton from "./components/LogoutButton.jsx";
 import { ClientProfile } from "./pages/ClientProfile.jsx";
 import { SignUp } from "./pages/SignUp.jsx";
 import "./index.css";
@@ -13,45 +12,36 @@ import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <App />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/courses",
-          element: <Courses />,
-        },
-        { path: "/admin", element: <AdministratorPage /> },
-        {
-          path: "/login",
-          element: <LoginPage />,
-        },
-        {
-          path: "/signUp",
-          element: <SignUp />,
-        },
-        {
-          path: "/client",
-          element: <ClientProfile />,
-        },
-      ],
-    },
-  ]
-  // createRoutesFromElements(
-  //   <Route path="/" element={<App />}>
-  //     <Route path="/" element={<Home />} />
-  //     <Route path="/" element={<Instructors />} />
-  //     <Route path="/courses" element={<Courses />} />
-  //   </Route>
-  // )
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
+      },
+      { path: "/admin", element: <AdministratorPage /> },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
+      },
+      {
+        path: "/client",
+        element: <ClientProfile />,
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={globalStore}>
