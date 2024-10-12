@@ -12,7 +12,6 @@ import {
   Instructor,
 } from "./models/index.js";
 import cors from "cors";
-import { Op } from "sequelize";
 
 const app = express();
 const PORT = process.env.PORT || 5090;
@@ -242,8 +241,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get("/api/my-appointments", async (req, res) => {
-  const userId = req.session.user;
-  console.log(req.session);
+  const userId = req.session.user.userId;
   try {
     let appointments;
 
