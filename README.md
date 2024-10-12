@@ -58,7 +58,7 @@
 
 - npm start: Starts the development server.
 - npm build: Builds the application for production.
-- npm seed: Seeds the database (requires backend setup).
+- npm seed: Seeds the database
 
 ### License
 
