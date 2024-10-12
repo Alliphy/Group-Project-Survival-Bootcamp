@@ -12,6 +12,7 @@ import {
   Instructor,
 } from "./models/index.js";
 import cors from "cors";
+import { Op } from "sequelize";
 
 const app = express();
 const PORT = process.env.PORT || 5090;
@@ -189,7 +190,38 @@ function loginRequired(req, res, next) {
 
 app.post("/api/create-appointment", async (req, res) => {
   const { date, instructor_id, client_id, course_id } = req.body;
-  // console.log({ date, instructor_id, client_id, course_id });
+  const avail = await Avail.findOne({
+    where: { date: date },
+  });
+  switch (instructor_id) {
+    case 1:
+      avail.ripley = false
+      await avail.save()
+      break;
+    case 2:
+      avail.strode = false
+      await avail.save()
+      break;
+    case 3:
+      avail.williams = false
+      await avail.save()
+      break;
+    case 4:
+      avail.warrens = false
+      await avail.save()
+      break;
+    case 5:
+      avail.washington = false
+      await avail.save()
+      break;
+    case 6:
+      avail.asakawa = false
+      await avail.save()
+      break;
+    default:
+      console.log(`No instructors found under ${instructor_id}`);
+  }
+
   await Appointment.create({
     date: date,
     instructorId: instructor_id,
@@ -197,6 +229,7 @@ app.post("/api/create-appointment", async (req, res) => {
     courseId: course_id,
   });
 
+  console.log("updated record:", avail);
   return res.send("appointment created");
 });
 

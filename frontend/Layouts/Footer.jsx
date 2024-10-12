@@ -13,6 +13,7 @@ export const Footer = () => {
 
   const [selectInstructor, setSelectInstructor] = useState("");
   const [selectAllInstructors, setSelectAllInstructors] = useState([]);
+  const [avails, setAvails] = useState([]);
 
   const [courses, setCourses] = useState([]);
   const [selectCourse, setSelectCourse] = useState("");
@@ -87,8 +88,9 @@ export const Footer = () => {
   }, []);
 
   function handleSelectInstructor(e) {
+    const instructor = e.target.value;
     const selectedInstructorCourses = [];
-    setSelectInstructor(e.target.value);
+    setSelectInstructor(instructor);
 
     // For future reference, this only works if all the instructors are fetched in order.
     // If an instructor is deleted, this will NEED to be refactored in order to work.
@@ -103,6 +105,17 @@ export const Footer = () => {
         selectedInstructorCourses.push(course);
       }
     }
+    fetch("/api/instructor-avails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Here, "selectInstructor" is the last name of the selected instructor from the footer component.
+      body: JSON.stringify({ instructor }),
+    }).then(async (data) => {
+      const availArr = await data.json();
+      setAvails(availArr);
+    });
     setCoursesToShow(selectedInstructorCourses);
   }
 
@@ -223,6 +236,8 @@ export const Footer = () => {
                   availability={selectInstructor.availability}
                   date={date}
                   setDate={setDate}
+                  avails={avails}
+                  setAvails={setAvails}
                 />
               )}
               {/* {console.log(selectInstructor.availability)} */}
