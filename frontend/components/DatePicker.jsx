@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 
 export const DatePicker = (props) => {
-  const {date, setDate} = props
+  const { date, setDate } = props;
   const [avails, setAvails] = useState([]);
 
   const flatpickr = useRef(null);
@@ -48,14 +48,14 @@ export const DatePicker = (props) => {
         },
       }}
       onDayCreate={(selectedDates) => {
-        selectedDates.forEach((date) => {
-          //  TODO //
-          // REFACTOR THIS TO WORK FOR APPOINTMENT CREATION
-          // THIS SHOULD MAKE A CALL BACK TO THE DB TO SET THE SELECTED INSTRUCTOR
-          // ON THE SELECTED DATE TO BE FALSE IN THE AVAILS TABLE
-          // courses[currentInstructor.name].find Course => Course.availableDates.find theDate =>
-          // theDate = date
-        });
+        // selectedDates.forEach((date) => {
+        //  TODO //
+        // REFACTOR THIS TO WORK FOR APPOINTMENT CREATION
+        // THIS SHOULD MAKE A CALL BACK TO THE DB TO SET THE SELECTED INSTRUCTOR
+        // ON THE SELECTED DATE TO BE FALSE IN THE AVAILS TABLE
+        // courses[currentInstructor.name].find Course => Course.availableDates.find theDate =>
+        // theDate = date
+        // });
       }}
       data-enable-time
       value={date.toDate()}

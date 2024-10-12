@@ -209,7 +209,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get("/api/my-appointments", async (req, res) => {
-  const userId = req.session.user.userId;
+  const userId = req.session.user;
   console.log(req.session);
   try {
     let appointments;
