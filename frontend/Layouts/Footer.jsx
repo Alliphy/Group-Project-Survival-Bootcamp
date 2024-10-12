@@ -77,15 +77,6 @@ export const Footer = () => {
     });
   }, []);
 
-  // Fetches all courses
-  useEffect(() => {
-    fetch("/api/all-courses").then(async (data) => {
-      const courses = await data.json();
-      console.log("Courses: ", courses);
-      setCourses(courses);
-    });
-  }, []);
-
   function handleSelectInstructor(e) {
     const selectedInstructorCourses = [];
     setSelectInstructor(e.target.value);

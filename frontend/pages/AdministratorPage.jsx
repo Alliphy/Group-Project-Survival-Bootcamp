@@ -1,7 +1,6 @@
-import { DatePicker } from "../components/DatePicker.jsx";
 import { useState, useEffect, useCallback } from "react";
 import "flatpickr/dist/themes/material_green.css";
-import dayjs from "dayjs";
+
 import "../administrator.css";
 import { useSelector } from "react-redux";
 
@@ -11,7 +10,7 @@ export const AdministratorPage = (props) => {
   );
 
   const isLoggedIn = useSelector((state) => {
-    return state.globalState.user.userId;
+    return state.globalState.user;
   });
 
   const [currentInstructor, setCurrentInstructor] = useState({
@@ -25,16 +24,6 @@ export const AdministratorPage = (props) => {
 
   // State to hold the list of appointments for a selected course
   const [appointments, setAppointments] = useState([]);
-
-  // useEffect(() => {
-  //   const userKeys = Object.keys(isLoggedIn);
-  //   if (userKeys.includes("instructorId")) {
-  //     console.log("instructor is logged in");
-  //     return;
-  //   } else {
-  //     console.log("Not authorized");
-  //   }
-  // }, []);
 
   useEffect(() => {
     fetch("/api/all-courses").then(async (data) => {
@@ -54,7 +43,7 @@ export const AdministratorPage = (props) => {
     });
   }, []);
 
-  console.log(currentInstructor);
+  // console.log(currentInstructor);
 
   return (
     isLoggedIn.email && (
@@ -70,7 +59,8 @@ export const AdministratorPage = (props) => {
             </div>
           ))}
         </div>
-        {/* 
+        {/* will be added in future implementation to adjust their own availability
+
         <DatePicker
           selectInstructor={instructorName}
           date={date}

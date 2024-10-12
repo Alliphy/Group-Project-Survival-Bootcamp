@@ -223,7 +223,7 @@ app.get("/api/my-appointments", async (req, res) => {
         where: { clientId: userId },
       });
     }
-    // console.log(appointments);
+    console.log(appointments);
     return res.json(appointments);
   } catch (error) {
     console.error("error getting appointments", error);
@@ -274,58 +274,6 @@ app.post("/api/admin/avail", loginRequired, async (req, res) => {
   const availability = await Avail.create({ date: date });
 
   res.json(availability); // Send a JSON response containing the newly created post
-});
-
-app.get("/dummy", (req, res) => {
-  const dummyData = [
-    {
-      instructorId: 1,
-      email: "john.doe@example.com",
-      firstName: "Ellen",
-      lastName: "Ripley",
-      password: "password123",
-      availability: ["2024-10-24"],
-      Courses: [
-        {
-          courseId: 101,
-          title: "Introduction to Programming",
-          description:
-            "This course provides an introduction to programming concepts using Python.",
-        },
-        {
-          courseId: 102,
-          title: "Data Structures",
-          description:
-            "Learn about data structures such as arrays, stacks, queues, and linked lists.",
-          availability: ["2024-10-05"],
-        },
-      ],
-    },
-    {
-      instructorId: 2,
-      email: "jane.smith@example.com",
-      firstName: "Laurie",
-      lastName: "Strode",
-      password: "securePass456",
-      availability: ["2024-10-01"],
-      Courses: [
-        {
-          courseId: 201,
-          title: "Advanced Mathematics",
-          description:
-            "A deep dive into advanced calculus, algebra, and statistical methods.",
-        },
-        {
-          courseId: 202,
-          title: "Linear Algebra",
-          description:
-            "Learn the fundamentals of linear algebra, matrices, and vector spaces.",
-        },
-      ],
-    },
-  ];
-
-  res.status(200).json({ data: dummyData, success: true });
 });
 
 app.get("/api/instructor/data", async (req, res) => {
