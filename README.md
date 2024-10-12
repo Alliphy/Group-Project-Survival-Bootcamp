@@ -34,6 +34,7 @@
 - Create a backend server using Express.js and integrate with the database.
 
 - Implement API endpoints for user authentication, course data retrieval, and appointment scheduling.
+
   Frontend Development:
 
 - Start the development server: npm start
